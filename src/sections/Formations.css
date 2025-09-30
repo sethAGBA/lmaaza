@@ -1,0 +1,71 @@
+.formations-section {
+  margin-top: 3rem;
+  padding: 48px 16px;
+  background: linear-gradient(180deg, #fff, #fafafa);
+  color: #222;
+}
+.formations-section .container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.formations-title {
+  font-size: 28px;
+  margin: 0;
+  color: #2b0249;
+}
+.formations-sub {
+  color: #444;
+  margin-top: 8px;
+}
+.formations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+.formation-card {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(16,24,40,.06);
+}
+.formation-left .formation-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4f0ff;
+  border-radius: 8px;
+}
+.formation-name {
+  margin: 0 0 6px 0;
+  font-weight: 600;
+}
+.formation-desc {
+  margin: 0 0 8px 0;
+  color: #555;
+}
+.formation-more {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  color: #6b21a8;
+  font-weight: 600;
+}
+.objectifs.card {
+  margin-top: 24px;
+  padding: 16px;
+  border-radius: 10px;
+  background: linear-gradient(90deg,#fff,#fbf8ff);
+}
+.obj-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.formations-cta { margin-top: 22px; }
+.cta-panel { background: #2b0249; color: #fff; padding: 18px; border-radius: 10px; }
+.btn-primary { background: #6b21a8; color: #fff; padding: 8px 14px; border: none; border-radius: 8px; cursor: pointer; }

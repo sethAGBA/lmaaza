@@ -1,0 +1,152 @@
+/* src/components/Header.css
+   Header styles (native CSS) — dark background, purple accent to match footer
+*/
+
+:root{
+  --bg: #0f1724;       /* header/footer background */
+  --panel: #071022;    /* mobile menu panel */
+  --muted: #cbd5e1;    /* muted text */
+  --accent: #a78bfa;   /* brand purple */
+  --accent-600: #7c3aed;
+  --accent-cta: #fef3c7; /* CTA / active highlight */
+}
+
+/* Header container */
+.header{
+  position: fixed;
+  inset: 0 0 auto 0; /* top:0; left/right:0 */
+  width: 100%;
+  z-index: 50;
+  background: var(--bg);
+  color: #fff;
+  transition: background .25s ease, box-shadow .25s ease;
+}
+
+/* Scrolled state */
+.header.scrolled{
+  background: rgba(15,23,36,0.95);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 18px rgba(2,6,23,0.22);
+}
+
+/* Inner container; keep consistent with Footer.container */
+.nav-container{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
+}
+
+/* Flex row for brand / menus */
+.nav-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* Brand */
+.brand-title{
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.2px;
+}
+.brand-title.scrolled{
+  color: #fff;
+}
+
+/* Desktop menu (hidden on small screens) */
+.desktop-menu{
+  display: none;
+  gap: 1.25rem;
+  align-items: center;
+}
+@media (min-width: 768px){
+  .desktop-menu{ display: flex; }
+}
+
+/* Menu buttons */
+.menu-button{
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-weight: 500;
+  padding: 0.4rem 0.5rem;
+  border-radius: 6px;
+  transition: color .12s ease, background .12s ease, transform .12s ease;
+}
+.menu-button:hover{
+  color: #fff;
+  background: rgba(255,255,255,0.02);
+}
+.menu-button.active{
+  color: var(--accent-cta);
+  font-weight: 700;
+}
+.menu-button.scrolled{
+  color: var(--muted);
+}
+
+/* Mobile toggle button */
+.mobile-toggle{
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem;
+  border-radius: 6px;
+}
+.mobile-toggle:focus{ outline: 2px solid rgba(167,139,250,0.18); outline-offset: 2px; }
+@media (min-width: 768px){
+  .mobile-toggle{ display: none; }
+}
+
+/* Icon sizing (lucide icons inherit color) */
+.icon{
+  width: 1.25rem;
+  height: 1.25rem;
+  color: inherit;
+}
+
+/* Mobile menu panel */
+.mobile-menu{
+  margin-top: 0.75rem;
+  background: var(--panel);
+  border-radius: 8px;
+  box-shadow: 0 10px 24px rgba(2,6,23,0.36);
+  padding: 0.5rem;
+}
+
+/* Mobile menu items */
+.mobile-menu-item{
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  color: var(--muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background .12s ease, color .12s ease;
+}
+.mobile-menu-item:hover{
+  background: rgba(255,255,255,0.02);
+  color: #fff;
+}
+.mobile-menu-item.active{
+  color: var(--accent);
+  font-weight: 700;
+  background: rgba(167,139,250,0.06);
+}
+
+/* Small helper */
+.icon-space{ margin-right: 0.5rem; display: inline-flex; align-items: center; }
+
+/* Optional small responsive tweaks */
+@media (min-width: 1024px){
+  .nav-container{ padding-left: 1.25rem; padding-right: 1.25rem; }
+  .brand-title{ font-size: 1.375rem; }
+}

@@ -1,0 +1,75 @@
+.partenaires-section {
+    margin-top: 3rem;
+    padding: 48px 16px;
+    background: linear-gradient(180deg, #fbfbff, #f8f7ff);
+    color: #222;
+}
+
+.partenaires-section .container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.partenaires-section .title {
+    font-size: 28px;
+    color: #2b0249;
+    margin-bottom: 6px;
+}
+
+.partenaires-section .sub {
+    color: #555;
+    margin-bottom: 22px;
+}
+
+.partners-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.partner-card {
+    background: #fff;
+    padding: 18px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, .06);
+}
+
+.partner-card .logo {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.partner-name {
+    font-weight: 700;
+    margin: 0 0 6px 0;
+}
+
+.partner-type {
+    color: #6b21a8;
+    font-weight: 600;
+}
+
+.cta-box {
+    background: #fff;
+    padding: 18px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.cta-desc {
+    color: #444;
+    max-width: 800px;
+    margin: 0 auto 12px;
+}
+
+.btn-primary {
+    background: #6b21a8;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+}
