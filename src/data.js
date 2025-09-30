@@ -2,16 +2,29 @@ import { Home, Users, Wrench, Lightbulb, Rocket, Book, Trophy, Handshake, Phone,
 
 // Static data for the app with Lucide React icons
 export const menuItems = [
-  { id: 'accueil', label: 'Accueil', icon: <Home className="w-5 h-5" /> },
-  { id: 'apropos', label: 'À Propos', icon: <Users className="w-5 h-5" /> },
-  { id: 'services', label: 'Services', icon: <Wrench className="w-5 h-5" /> },
-  { id: 'solutions', label: 'Solutions', icon: <Lightbulb className="w-5 h-5" /> },
-  { id: 'produits', label: 'Produits', icon: <Rocket className="w-5 h-5" /> },
-  { id: 'formations', label: 'Formations', icon: <Book className="w-5 h-5" /> },
-  { id: 'projets', label: 'Projets', icon: <Trophy className="w-5 h-5" /> },
-  { id: 'blog', label: 'Blog', icon: <FileText className="w-5 h-5" /> },
-  { id: 'partenaires', label: 'Partenaires', icon: <Handshake className="w-5 h-5" /> },
-  { id: 'contact', label: 'Contact', icon: <Phone className="w-5 h-5" /> }
+  { id: 'accueil', label: 'Accueil', icon: <Home className="w-5 h-5" />, content: {
+    title: "L'Maaza",
+    lead: "Bienvenue sur la page d'accueil de L'Maaza. Nous sommes ravis de vous accueillir.",
+    subtext: "Nous développons des solutions technologiques pour l'Agriculture, la Santé, l'Éducation et l'Environnement",
+    heroBg: "bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-700",
+    ctaPrimary: { text: "Découvrir nos services", link: "/services" },
+    ctaSecondary: { text: "Nous contacter", link: "/contact" },
+    stats: [
+      { value: "20+", label: "Années d'expérience" },
+      { value: "5", label: "Domaines d'expertise" },
+      { value: "25+", label: "Jeunes formées (P.A.M.F)" },
+      { value: "3", label: "Axes stratégiques" }
+    ]
+  } },
+  { id: 'apropos', label: 'À Propos', icon: <Users className="w-5 h-5" />, content: "<p>Découvrez notre <strong>histoire</strong>, notre mission et notre équipe passionnée.</p><p>Nous travaillons sur des projets en <em>éducation</em>, <em>santé</em> et <em>agriculture</em>.</p>" },
+  { id: 'services', label: 'Services', icon: <Wrench className="w-5 h-5" />, content: "Explorez la gamme complète de nos services innovants et personnalisés." },
+  { id: 'solutions', label: 'Solutions', icon: <Lightbulb className="w-5 h-5" />, content: "Découvrez nos solutions technologiques adaptées à vos besoins spécifiques." },
+  { id: 'produits', label: 'Produits', icon: <Rocket className="w-5 h-5" />, content: "Parcourez notre catalogue de produits de pointe conçus pour l'avenir." },
+  { id: 'formations', label: 'Formations', icon: <Book className="w-5 h-5" />, content: "Développez vos compétences grâce à nos programmes de formation de haute qualité." },
+  { id: 'projets', label: 'Projets', icon: <Trophy className="w-5 h-5" />, content: "Découvrez nos réalisations et les projets qui nous passionnent." },
+  { id: 'blog', label: 'Blog', icon: <FileText className="w-5 h-5" />, content: "Restez informé des dernières actualités et innovations technologiques." },
+  { id: 'partenaires', label: 'Partenaires', icon: <Handshake className="w-5 h-5" />, content: "Rencontrez nos partenaires et découvrez comment nous collaborons pour innover." },
+  { id: 'contact', label: 'Contact', icon: <Phone className="w-5 h-5" />, content: "Contactez-nous pour toute question, demande d'information ou collaboration." }
 ];
 
 export const teamMembers = [

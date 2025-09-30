@@ -1,15 +1,20 @@
 import React from 'react';
+import RenderContent from '../components/RenderContent';
 import { Link } from 'react-router-dom';
 import { CheckCircle, ArrowRight } from 'lucide-react';
 import { services } from '../data';
 
-const Formations = () => {
+const Formations = ({ menuItems }) => {
+  const formationsPage = menuItems.find(item => item.id === 'formations');
+
   return (
     <div className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-800 mb-4">Nos Formations</h2>
-          <p className="text-xl text-gray-600">Formations théoriques et pratiques adaptées au marché de l'emploi</p>
+          <div className="text-xl text-gray-600">
+            {formationsPage ? <RenderContent content={formationsPage.content} /> : "Chargement du contenu..."}
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">

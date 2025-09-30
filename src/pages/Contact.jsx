@@ -1,13 +1,18 @@
 import React from 'react';
 import { MapPin, Phone, Mail, Globe } from 'lucide-react';
+import RenderContent from '../components/RenderContent';
 
-const Contact = () => {
+const Contact = ({ menuItems }) => {
+  const contactPage = menuItems.find(item => item.id === 'contact');
+
   return (
     <div className="py-16 bg-gradient-to-br from-purple-600 to-blue-600">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-white mb-4">Contactez-Nous</h2>
-          <p className="text-xl text-white opacity-90">Prêt à transformer votre vision technologique en réalité ?</p>
+            <div className="text-xl text-white opacity-90">
+              {contactPage ? <RenderContent content={contactPage.content} /> : "Chargement du contenu..."}
+            </div>
         </div>
 
         <div className="max-w-4xl mx-auto">
@@ -73,5 +78,4 @@ const Contact = () => {
     </div>
   );
 };
-
 export default Contact;

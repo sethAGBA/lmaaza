@@ -1,15 +1,26 @@
 import React from 'react';
+import RenderContent from '../components/RenderContent';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { services } from '../data';
+import * as Icons from 'lucide-react';
 
-const Services = () => {
+const Services = ({ menuItems, services = [] }) => {
+  const servicesPage = menuItems.find(item => item.id === 'services');
+
   return (
     <div className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">Nos Services</h2>
-          <p className="text-xl text-gray-600">Trois axes stratégiques pour votre réussite technologique</p>
+          <h2 className="text-4xl font-bold text-gray-800 mb-4">{servicesPage && servicesPage.content && typeof servicesPage.content === 'object' ? servicesPage.content.title : 'Nos Services'}</h2>
+          <div className="text-xl text-gray-600">
+            {servicesPage ? (
+              servicesPage.content && typeof servicesPage.content === 'object' ? (
+                <RenderContent content={servicesPage.content.intro} />
+              ) : (
+                <RenderContent content={servicesPage.content} />
+              )
+            ) : 'Chargement du contenu...'}
+          </div>
         </div>
 
         {services.map((category, index) => (
@@ -22,7 +33,16 @@ const Services = () => {
                 <div key={idx} className="bg-gray-50 p-6 rounded-lg hover:shadow-lg transition-shadow border-l-4 border-purple-600">
                   <div className="flex items-center mb-4">
                     <div className="p-2 bg-purple-100 rounded-lg mr-4">
-                      {service.icon}
+                      {service.icon ? (
+                        typeof service.icon === 'string' ? (
+                          (() => {
+                            const IconComp = Icons[service.icon];
+                            return IconComp ? <IconComp className="w-6 h-6 text-purple-600" /> : <span>{service.icon}</span>;
+                          })()
+                        ) : (
+                          service.icon
+                        )
+                      ) : null}
                     </div>
                     <h4 className="font-bold text-gray-800">{service.name}</h4>
                   </div>

@@ -1,9 +1,9 @@
 import React from 'react';
 import AdminDashboard from '../components/AdminDashboard';
 
-const Admin = () => {
+const Admin = ({ menuItems, setMenuItems, services, setServices }) => {
     return (
-        <AdminDashboard />
+        <AdminDashboard menuItems={menuItems} setMenuItems={setMenuItems} services={services} setServices={setServices} />
     );
 };
 

@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const EditPage = ({ page, onSave, onCancel }) => {
-    const [content, setContent] = useState('');
+    const [content, setContent] = useState(page.content || '');
+
+    useEffect(() => {
+        setContent(page.content || '');
+    }, [page]);
 
     const handleSave = () => {
-        console.log(`Saving content for page ${page.id}:`, content);
-        onSave();
+        onSave(page.id, content);
     };
 
     return (

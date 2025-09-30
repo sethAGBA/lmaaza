@@ -1,14 +1,19 @@
 import React from 'react';
+import RenderContent from '../components/RenderContent';
 import { ArrowRight } from 'lucide-react';
 import { solutions } from '../data';
 
-const Solutions = () => {
+const Solutions = ({ menuItems }) => {
+  const solutionsPage = menuItems.find(item => item.id === 'solutions');
+
   return (
     <div className="py-16 bg-gradient-to-br from-blue-50 to-purple-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-800 mb-4">Nos Solutions par Secteur</h2>
-          <p className="text-xl text-gray-600">Des innovations technologiques pour transformer votre secteur d'activité</p>
+          <div className="text-xl text-gray-600">
+            {solutionsPage ? <RenderContent content={solutionsPage.content} /> : "Chargement du contenu..."}
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

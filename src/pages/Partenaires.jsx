@@ -1,13 +1,18 @@
 import React from 'react';
+import RenderContent from '../components/RenderContent';
 import { Link } from 'react-router-dom';
 
-const Partenaires = () => {
+const Partenaires = ({ menuItems }) => {
+  const partenairesPage = menuItems.find(item => item.id === 'partenaires');
+
   return (
     <div className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-800 mb-4">Nos Partenaires</h2>
-          <p className="text-xl text-gray-600">Ensemble pour l'innovation technologique au Togo</p>
+          <div className="text-xl text-gray-600">
+            {partenairesPage ? <RenderContent content={partenairesPage.content} /> : "Chargement du contenu..."}
+          </div>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">

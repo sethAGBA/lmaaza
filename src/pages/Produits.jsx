@@ -1,14 +1,19 @@
 import React from 'react';
+import RenderContent from '../components/RenderContent';
 import { Link } from 'react-router-dom';
 import { Cpu, CheckCircle, Heart, Building, DollarSign } from 'lucide-react';
 
-const Produits = () => {
+const Produits = ({ menuItems }) => {
+  const produitsPage = menuItems.find(item => item.id === 'produits');
+
   return (
     <div className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-800 mb-4">Nos Produits Phares</h2>
-          <p className="text-xl text-gray-600">Innovation au service de la tradition</p>
+          <div className="text-xl text-gray-600">
+            {produitsPage ? <RenderContent content={produitsPage.content} /> : "Chargement du contenu..."}
+          </div>
         </div>
 
         <div className="max-w-4xl mx-auto">

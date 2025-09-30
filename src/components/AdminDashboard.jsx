@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PagesManager from './PagesManager';
+import EditAccueil from './EditAccueil';
+import EditServicesItems from './EditServicesItems';
+import EditServicesFull from './EditServicesFull';
 
-const AdminDashboard = () => {
+const AdminDashboard = ({ menuItems, setMenuItems, services, setServices }) => {
+    console.log('AdminDashboard menuItems:', menuItems);
+
+    // Quick debug summary for pages manager
+    const pagesSummary = Array.isArray(menuItems) ? `${menuItems.length} pages: ${menuItems.map(m => m.label).join(', ')}` : 'menuItems is not an array';
+
+    // Find accueil page and its stats
+    const accueil = Array.isArray(menuItems) ? menuItems.find(m => m.id === 'accueil') : null;
+    const accueilContent = accueil && typeof accueil.content === 'object' ? accueil.content : null;
+    const accueilStats = accueilContent && Array.isArray(accueilContent.stats) ? accueilContent.stats : [];
+
     // Mock data for users
     const users = [
         { id: 1, name: 'John Doe', email: 'john.doe@example.com', role: 'user' },
@@ -9,10 +22,51 @@ const AdminDashboard = () => {
         { id: 3, name: 'Admin User', email: 'admin@example.com', role: 'admin' },
     ];
 
+    // local state to open EditAccueil modal
+    const [editingAccueil, setEditingAccueil] = useState(false);
+        const [editingServices, setEditingServices] = useState(false);
+
+    const handleSaveAccueil = (id, newContent) => {
+        setMenuItems(prev => prev.map(item => item.id === id ? { ...item, content: newContent } : item));
+        setEditingAccueil(false);
+    };
+
+    const servicesPage = Array.isArray(menuItems) ? menuItems.find(m => m.id === 'services') : null;
+
+    const handleSaveServices = (id, newContent) => {
+        // newContent is { title, intro } from EditServicesFull
+        setMenuItems(prev => prev.map(item => item.id === id ? { ...item, content: newContent } : item));
+        // services array is updated inside EditServicesFull via setServices prop
+        setEditingServices(false);
+    };
+
     return (
         <div className="container mx-auto px-4 py-8">
             <h1 className="text-3xl font-bold mb-4">Tableau de bord administrateur</h1>
             <div className="bg-white rounded-lg shadow-md p-4 md:p-8">
+                <div className="mb-4 p-2 bg-gray-50 rounded text-sm text-gray-700">{pagesSummary}</div>
+                {accueil && (
+                    <div className="mb-4 p-4 bg-indigo-50 rounded">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <div className="text-sm font-semibold text-indigo-700">Accueil — Statistiques</div>
+                                <div className="mt-2 flex gap-4">
+                                    {accueilStats.length > 0 ? accueilStats.map((s, i) => (
+                                        <div key={i} className="bg-white p-2 rounded shadow-sm text-center">
+                                            <div className="text-lg font-bold text-gray-800">{s.value}</div>
+                                            <div className="text-xs text-gray-600">{s.label}</div>
+                                        </div>
+                                    )) : <div className="text-sm text-gray-600">Aucune statistique définie.</div>}
+                                </div>
+                            </div>
+                            <div className="flex gap-2">
+                                <button onClick={() => document.getElementById('pages-manager')?.scrollIntoView({ behavior: 'smooth' })} className="bg-indigo-600 text-white px-3 py-2 rounded">Aller à Pages</button>
+                                <button onClick={() => setEditingAccueil(true)} className="bg-indigo-700 text-white px-3 py-2 rounded">Modifier Accueil</button>
+                                <button onClick={() => setEditingServices(true)} className="bg-indigo-500 text-white px-3 py-2 rounded">Modifier Services</button>
+                            </div>
+                        </div>
+                    </div>
+                )}
                 <h2 className="text-2xl font-bold mb-6">Utilisateurs</h2>
                 <div className="hidden md:block">
                     <table className="w-full table-auto">
@@ -73,7 +127,13 @@ const AdminDashboard = () => {
                     ))}
                 </div>
             </div>
-            <PagesManager />
+            <PagesManager menuItems={menuItems} setMenuItems={setMenuItems} services={services} setServices={setServices} />
+            {editingAccueil && accueil && (
+                <EditAccueil page={accueil} onSave={handleSaveAccueil} onCancel={() => setEditingAccueil(false)} />
+            )}
+            {editingServices && servicesPage && (
+                <EditServicesFull page={servicesPage} onSave={handleSaveServices} onCancel={() => setEditingServices(false)} services={services} setServices={setServices} />
+            )}
         </div>
     );
 };

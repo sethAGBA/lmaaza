@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, menuItems }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
@@ -22,7 +22,7 @@ const Layout = ({ children }) => {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header isScrolled={isScrolled} />
+      <Header isScrolled={isScrolled} menuItems={menuItems} />
       <main>
         {children}
       </main>

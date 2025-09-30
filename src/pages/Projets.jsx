@@ -1,14 +1,19 @@
 import React from 'react';
+import RenderContent from '../components/RenderContent';
 import { Award, Cpu, Code, Wrench } from 'lucide-react';
 import { projets } from '../data';
 
-const Projets = () => {
+const Projets = ({ menuItems }) => {
+  const projetsPage = menuItems.find(item => item.id === 'projets');
+
   return (
     <div className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-800 mb-4">Nos Projets Réalisés</h2>
-          <p className="text-xl text-gray-600">Des actions concrètes pour l'éveil technologique des jeunes</p>
+          <div className="text-xl text-gray-600">
+            {projetsPage ? <RenderContent content={projetsPage.content} /> : "Chargement du contenu..."}
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
