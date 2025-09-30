@@ -1,14 +1,17 @@
-// Static data for the app (kept serializable: icons can be mapped in components)
+import { Home, Users, Wrench, Lightbulb, Rocket, Book, Trophy, Handshake, Phone, Cpu, Code, Smartphone, Zap, Database, FileText } from 'lucide-react';
+
+// Static data for the app with Lucide React icons
 export const menuItems = [
-  { id: 'accueil', label: 'Accueil', icon: '🏠' },
-  { id: 'apropos', label: 'À Propos', icon: '👥' },
-  { id: 'services', label: 'Services', icon: '⚙️' },
-  { id: 'solutions', label: 'Solutions', icon: '💡' },
-  { id: 'produits', label: 'Produits', icon: '🚀' },
-  { id: 'formations', label: 'Formations', icon: '📚' },
-  { id: 'projets', label: 'Projets', icon: '🏆' },
-  { id: 'partenaires', label: 'Partenaires', icon: '🤝' },
-  { id: 'contact', label: 'Contact', icon: '📞' }
+  { id: 'accueil', label: 'Accueil', icon: <Home className="w-5 h-5" /> },
+  { id: 'apropos', label: 'À Propos', icon: <Users className="w-5 h-5" /> },
+  { id: 'services', label: 'Services', icon: <Wrench className="w-5 h-5" /> },
+  { id: 'solutions', label: 'Solutions', icon: <Lightbulb className="w-5 h-5" /> },
+  { id: 'produits', label: 'Produits', icon: <Rocket className="w-5 h-5" /> },
+  { id: 'formations', label: 'Formations', icon: <Book className="w-5 h-5" /> },
+  { id: 'projets', label: 'Projets', icon: <Trophy className="w-5 h-5" /> },
+  { id: 'blog', label: 'Blog', icon: <FileText className="w-5 h-5" /> },
+  { id: 'partenaires', label: 'Partenaires', icon: <Handshake className="w-5 h-5" /> },
+  { id: 'contact', label: 'Contact', icon: <Phone className="w-5 h-5" /> }
 ];
 
 export const teamMembers = [
@@ -39,19 +42,19 @@ export const services = [
   {
     category: "Productions/Services",
     items: [
-      { name: "Serveur automatique de boissons locales", desc: "Solution innovante pour la vente hygiénique de boissons traditionnelles", icon: 'cpu' },
-      { name: "Impression 3D", desc: "Prototypage rapide et fabrication additive", icon: 'wrench' },
-      { name: "Production PCB", desc: "Conception et fabrication de circuits imprimés", icon: 'cpu' }
+      { name: "Serveur automatique de boissons locales", desc: "Solution innovante pour la vente hygiénique de boissons traditionnelles", icon: <Cpu className="w-6 h-6" /> },
+      { name: "Impression 3D", desc: "Prototypage rapide et fabrication additive", icon: <Wrench className="w-6 h-6" /> },
+      { name: "Production PCB", desc: "Conception et fabrication de circuits imprimés", icon: <Cpu className="w-6 h-6" /> }
     ]
   },
   {
     category: "Formations",
     items: [
-      { name: "Informatique / Bureautique", desc: "Formation complète aux outils informatiques", icon: 'code' },
-      { name: "Électronique / Arduino", desc: "Initiation aux systèmes électroniques et programmation", icon: 'cpu' },
-      { name: "Développement Mobile & Web", desc: "Création d'applications modernes", icon: 'smartphone' },
-      { name: "Énergie Solaire", desc: "Technologies d'énergie renouvelable", icon: 'zap' },
-      { name: "Analyse de Données", desc: "Collecte et traitement de données", icon: 'database' }
+      { name: "Informatique / Bureautique", desc: "Formation complète aux outils informatiques", icon: <Code className="w-6 h-6" /> },
+      { name: "Électronique / Arduino", desc: "Initiation aux systèmes électroniques et programmation", icon: <Cpu className="w-6 h-6" /> },
+      { name: "Développement Mobile & Web", desc: "Création d'applications modernes", icon: <Smartphone className="w-6 h-6" /> },
+      { name: "Énergie Solaire", desc: "Technologies d'énergie renouvelable", icon: <Zap className="w-6 h-6" /> },
+      { name: "Analyse de Données", desc: "Collecte et traitement de données", icon: <Database className="w-6 h-6" /> }
     ]
   }
 ];
@@ -83,12 +86,56 @@ export const projets = [
   }
 ];
 
+export const blogPosts = [
+  {
+    id: 1,
+    title: "L'Innovation Technologique au Service de l'Agriculture Togolaise",
+    excerpt: "Découvrez comment les technologies modernes transforment l'agriculture traditionnelle au Togo et créent de nouvelles opportunités pour les agriculteurs locaux.",
+    author: "BEBINESSO Toi Bebezseky",
+    date: "15 Décembre 2024",
+    category: "Agriculture",
+    readTime: "5 min",
+    image: "🌾"
+  },
+  {
+    id: 2,
+    title: "Formation Arduino : Démystifier l'Électronique pour les Jeunes",
+    excerpt: "Retour sur notre formation Arduino organisée avec Tilitu Lab et son impact sur l'éveil technologique des participants.",
+    author: "TETE MAWUSSI KOSSI FELIX",
+    date: "10 Décembre 2024",
+    category: "Formation",
+    readTime: "4 min",
+    image: "🔧"
+  },
+  {
+    id: 3,
+    title: "Le Serveur Automatique : Innovation et Tradition Réunies",
+    excerpt: "Comment notre serveur automatique de boissons locales préserve les traditions tout en apportant l'innovation technologique.",
+    author: "L'Maaza Team",
+    date: "5 Décembre 2024",
+    category: "Innovation",
+    readTime: "6 min",
+    image: "🤖"
+  },
+  {
+    id: 4,
+    title: "L'Importance de l'Éducation Technologique pour les Filles",
+    excerpt: "Pourquoi il est crucial d'encourager les jeunes filles à s'orienter vers les filières technologiques et comment y parvenir.",
+    author: "DADJA Massamasso Clarisse",
+    date: "1 Décembre 2024",
+    category: "Éducation",
+    readTime: "7 min",
+    image: "👩‍💻"
+  }
+];
+
 const data = {
   menuItems,
   teamMembers,
   services,
   solutions,
-  projets
+  projets,
+  blogPosts
 };
 
 export default data;
