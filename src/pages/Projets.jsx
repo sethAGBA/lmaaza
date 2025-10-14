@@ -17,7 +17,31 @@ const Projets = ({ menuItems }) => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          {projets.map((projet, index) => (
+          {projets.map((projet, index) => {
+            // map projet names to image folders (these folders live in public/images/projets)
+            const imagesMap = {
+              'P.A.M.F': [
+                '/images/projets/Projet(P.A.M.F)/image1.jpg',
+                '/images/projets/Projet(P.A.M.F)/image2.jpg',
+                '/images/projets/Projet(P.A.M.F)/image3.jpg'
+              ],
+              'P.E.T.E': [
+                '/images/projets/Projet(P.E.T.E)/eleve1.png',
+                '/images/projets/Projet(P.E.T.E)/eleve2.jpg',
+                '/images/projets/Projet(P.E.T.E)/eleve3.jpg',
+                '/images/projets/Projet(P.E.T.E)/eleve4.jpg',
+                '/images/projets/Projet(P.E.T.E)/eleve5.jpg',
+                '/images/projets/Projet(P.E.T.E)/eleve6.png'
+              ],
+              'Formation_Arduino': [
+                '/images/projets/Formation_Arduino/formationArduino1.png',
+                '/images/projets/Formation_Arduino/formationArduino2.png'
+              ]
+            };
+            const folderKey = projet.name === 'P.A.M.F' ? 'P.A.M.F' : (projet.name === 'P.E.T.E' ? 'P.E.T.E' : 'Formation_Arduino');
+            const imgs = imagesMap[folderKey] || [];
+
+            return (
             <div key={index} className="bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center mr-4">
@@ -31,6 +55,17 @@ const Projets = ({ menuItems }) => {
               
               <p className="text-gray-600 mb-6">{projet.description}</p>
               
+              {/* Project images gallery */}
+              {imgs.length > 0 && (
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  {imgs.map((src, i) => (
+                    <div key={i} className="bg-white rounded-md overflow-hidden">
+                      <img src={src} alt={`${projet.name}-${i}`} className="object-cover w-full h-36" />
+                    </div>
+                  ))}
+                </div>
+              )}
+
               <div className="grid grid-cols-2 gap-4 mb-4">
                 <div className="bg-white p-3 rounded-lg">
                   <div className="text-sm text-gray-500">Année</div>
@@ -47,11 +82,11 @@ const Projets = ({ menuItems }) => {
                 <div className="font-semibold text-purple-600">{projet.impact}</div>
               </div>
             </div>
-          ))}
+          )})}
         </div>
 
         <div className="bg-gray-50 p-8 rounded-lg">
-          <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">Formation Arduino chez Tilitu Lab</h3>
+          <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">Formation Arduino à Tilitu Lab</h3>
           <div className="max-w-3xl mx-auto text-center">
             <p className="text-gray-600 mb-6">
               En collaboration avec Tilitu Lab, nous avons organisé une formation Arduino couplée d'initiation aux NTIC 

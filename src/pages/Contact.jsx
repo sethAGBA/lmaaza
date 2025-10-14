@@ -20,8 +20,8 @@ const Contact = ({ menuItems }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 text-white text-center">
             <div className="flex flex-col items-center"><MapPin className="w-8 h-8 mb-2" /><span>Région de la Kara, Togo</span></div>
             <div className="flex flex-col items-center"><Phone className="w-8 h-8 mb-2" /><span>+228 93 89 29 19 / 90 09 26 72</span></div>
-            <div className="flex flex-col items-center"><Mail className="w-8 h-8 mb-2" /><span>contact@lmaaza.tg</span></div>
-            <div className="flex flex-col items-center"><Globe className="w-8 h-8 mb-2" /><span>www.lmaaza.tg</span></div>
+            <div className="flex flex-col items-center"><Mail className="w-8 h-8 mb-2" /><span>startuplmaaza228@gmail.com</span></div>
+            <div className="flex flex-col items-center"><Globe className="w-8 h-8 mb-2" /><span>www.lmaaza.net</span></div>
           </div>
 
           {/* Formulaire de contact */}

@@ -3,8 +3,6 @@ import EditPage from './EditPage';
 import EditAccueil from './EditAccueil';
 import EditAPropos from './EditAPropos';
 import RenderContent from './RenderContent';
-import EditServices from './EditServices';
-import EditServicesItems from './EditServicesItems';
 import EditServicesFull from './EditServicesFull';
 
 

@@ -19,7 +19,7 @@ const Header = ({ isScrolled, menuItems }) => {
           </Link>
           
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden lg:flex space-x-8">
             {menuItems.map((item) => {
               const path = item.id === 'accueil' ? '/' : `/${item.id}`;
               return (
@@ -38,16 +38,11 @@ const Header = ({ isScrolled, menuItems }) => {
             })}
           </div>
 
-          {/* User Profile Icon */}
-          <Link to="/profil" className={`transition-colors hover:text-purple-300 ${isScrolled ? 'text-gray-700' : 'text-white'}`}>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-          </Link>
+          {/* User Profile Icon removed per request */}
 
           {/* Mobile Menu Button */}
           <button 
-            className={`md:hidden ${isScrolled ? 'text-gray-700' : 'text-white'}`}
+            className={`lg:hidden ${isScrolled ? 'text-gray-700' : 'text-white'}`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -56,7 +51,7 @@ const Header = ({ isScrolled, menuItems }) => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 bg-white rounded-lg shadow-xl">
+          <div className="lg:hidden mt-4 bg-white rounded-lg shadow-xl">
             {menuItems.map((item) => {
               const path = item.id === 'accueil' ? '/' : `/${item.id}`;
               return (
@@ -72,18 +67,7 @@ const Header = ({ isScrolled, menuItems }) => {
                 </Link>
               );
             })}
-            <Link
-              to="/profil"
-              onClick={() => setIsMenuOpen(false)}
-              className={`w-full text-left px-4 py-3 hover:bg-gray-100 transition-colors flex items-center ${
-                isActive("/profil") ? 'text-purple-600 font-semibold bg-purple-50' : 'text-gray-700'
-              }`}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              Profil
-            </Link>
+            {/* Profile link removed from mobile menu per request */}
           </div>
         )}
       </nav>

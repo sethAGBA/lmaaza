@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PagesManager from './PagesManager';
 import EditAccueil from './EditAccueil';
-import EditServicesItems from './EditServicesItems';
 import EditServicesFull from './EditServicesFull';
 
 const AdminDashboard = ({ menuItems, setMenuItems, services, setServices }) => {

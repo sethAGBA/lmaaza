@@ -41,7 +41,7 @@ const Solutions = ({ menuItems }) => {
               du grand public et des grandes entreprises publiques et privées.
             </p>
             <div className="grid grid-cols-2 md:grid-cols-6 gap-4 text-center">
-              {['Éducation', 'Informatique', 'Télécom', 'Environnement', 'Agriculture', 'Commerce'].map((domaine) => (
+              {['Éducation', 'Informatique', 'Télécom' , 'Commerce'].map((domaine) => (
                 <div key={domaine} className="bg-purple-50 p-3 rounded-lg">
                   <span className="text-sm font-semibold text-purple-600">{domaine}</span>
                 </div>

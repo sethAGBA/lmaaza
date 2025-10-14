@@ -57,9 +57,9 @@ const APropos = ({ menuItems }) => {
                   <p>Dans la région de la Kara, nous avons identifié un manque crucial de structures proposant des solutions technologiques innovantes. L'Maaza se positionne comme une entreprise technologique locale pour combler ce vide.</p>
                   <p>Nous répondons à trois défis majeurs :</p>
                   <ul className="list-disc list-inside space-y-2 ml-4">
-                    <li>L'insuffisance de compétences technologiques locales</li>
-                    <li>Le manque de solutions technologiques adaptées</li>
-                    <li>La faible orientation des jeunes, surtout les filles, vers les filières technologiques</li>
+                    <li>L'insuffisance de compétences technologiques locales ,</li>
+                    <li>Le manque de solutions technologiques adaptées ,</li>
+                    <li>La faible orientation des jeunes, surtout les filles, vers les filières technologiques .</li>
                   </ul>
                 </>
               )}
@@ -86,7 +86,7 @@ const APropos = ({ menuItems }) => {
               <>
                 <div className="bg-white p-6 rounded-lg shadow-md mb-6">
                   <h4 className="font-semibold text-purple-600 mb-2">Vision</h4>
-                  <p className="text-gray-600">Développer des solutions technologiques innovantes dans l'Agriculture, la Santé, l'Éducation et la Protection de l'environnement.</p>
+                  <p className="text-gray-600">Développer des solutions technologiques innovantes dans l'Agriculture, la Santé, l'Éducation et la Protection de l'Environnement.</p>
                 </div>
                 <div className="bg-white p-6 rounded-lg shadow-md">
                   <h4 className="font-semibold text-purple-600 mb-2">Mission</h4>
@@ -101,7 +101,7 @@ const APropos = ({ menuItems }) => {
         <div className="text-center mb-12">
           <h3 className="text-2xl font-bold text-gray-800 mb-8">Nos Valeurs</h3>
           <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
-            {['Accessibilité', 'Professionnalisme', 'Innovation', 'Acquisition continue du savoir', 'Respect'].map((valeur, index) => (
+            {['Accessibilité', 'Professionnalisme', 'Acquisition continue du savoir', 'Respect'].map((valeur, index) => (
               <div key={index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                 <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Award className="w-6 h-6 text-purple-600" />
@@ -114,7 +114,7 @@ const APropos = ({ menuItems }) => {
 
         {/* Équipe */}
         <div>
-          <h3 className="text-2xl font-bold text-gray-800 mb-8 text-center">Notre Équipe</h3>
+          <h3 className="text-2xl font-bold text-gray-800 mb-8 text-center">Notre Équipe Dirigeante</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {teamMembers.map((member, index) => (
               <div key={index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">

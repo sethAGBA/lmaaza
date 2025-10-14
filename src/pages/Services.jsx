@@ -3,12 +3,20 @@ import RenderContent from '../components/RenderContent';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import * as Icons from 'lucide-react';
+import SEO from '../components/SEO';
 
 const Services = ({ menuItems, services = [] }) => {
   const servicesPage = menuItems.find(item => item.id === 'services');
 
   return (
-    <div className="py-16 bg-white">
+    <>
+      <SEO 
+        title="Services - Formation et Solutions Technologiques | L'Maaza"
+        description="Découvrez nos services de formation en informatique, électronique, Arduino, développement web et mobile, énergie solaire. Solutions technologiques innovantes au Togo."
+        keywords="formation informatique, électronique, Arduino, développement web, développement mobile, énergie solaire, impression 3D, PCB, Togo, L'Maaza"
+        canonical="https://lmaaza.net/services"
+      />
+      <div className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-800 mb-4">{servicesPage && servicesPage.content && typeof servicesPage.content === 'object' ? servicesPage.content.title : 'Nos Services'}</h2>
@@ -59,8 +67,8 @@ const Services = ({ menuItems, services = [] }) => {
           </h3>
           <div className="text-center max-w-3xl mx-auto">
             <p className="text-gray-600 mb-6">
-              Nous élaborons des projets de formation spécialement conçus pour les jeunes filles dans les milieux ruraux, 
-              visant à démystifier la technologie et encourager l'orientation vers les filières technologiques.
+              Nous élaborons des projets de formation spécialement conçus pour les jeunes en milieux scolaire; 
+              visant à leur faire découvrir, démystifier la technologie et les encourager à s'orienter vers les filières technologiques. Nous identifions et proposons des projets de formation pratique à l'endroit des enseignants de l'enseignement général, chargé des cours de technologie.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="bg-white p-4 rounded-lg">
@@ -73,7 +81,7 @@ const Services = ({ menuItems, services = [] }) => {
               </div>
               <div className="bg-white p-4 rounded-lg">
                 <h4 className="font-semibold text-purple-600 mb-2">Orientation</h4>
-                <p className="text-sm text-gray-600">Encourager les carrières technologiques post-BEPC</p>
+                <p className="text-sm text-gray-600">Encourager les apprenants à embrasser des fillières technologiques post-BEPC et post-BAC</p>
               </div>
             </div>
           </div>
@@ -88,7 +96,8 @@ const Services = ({ menuItems, services = [] }) => {
           </Link>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

@@ -36,3 +36,206 @@
     transform: rotate(360deg);
   }
 }
+
+/* Slide down animation used for hero element entrance */
+@keyframes slideDown {
+  from { transform: translateY(-40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.slide-down {
+  animation: slideDown 800ms cubic-bezier(.22,.9,.3,1) both;
+}
+
+.hero-photos { display: flex; gap: 1rem; align-items: center; justify-content: center; }
+.hero-photos .photo { width: 84px; height: 84px; border-radius: 9999px; overflow: hidden; border: 4px solid white; box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+.hero-photos .photo img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Large director photo overlay that sits above all content */
+.director-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 380px;
+  /* keep overlay under the header so header remains clickable (header uses z-50) */
+  z-index: 35; /* Higher than overlay-caption but lower than header */
+  overflow: hidden;
+  /* allow overlay to receive pointer events so its buttons work */
+  pointer-events: auto;
+}
+.director-hero-overlay .carousel-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.director-hero-overlay .carousel-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 700ms ease-in-out, transform 700ms ease-in-out;
+  transform: scale(1.02);
+  filter: brightness(0.85);
+  pointer-events: auto; /* allow clicking the image to advance */
+  cursor: pointer;
+  z-index: 10; /* sit under controls */
+}
+.director-hero-overlay .carousel-image.active {
+  opacity: 1;
+  transform: translateY(0) scale(1.02);
+}
+.carousel-controls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  padding: 0 12px;
+  pointer-events: none; /* container doesn't catch events */
+  z-index: 200; /* ensure controls are on top */
+}
+.carousel-controls button {
+  pointer-events: auto;
+  background: rgba(0,0,0,0.35);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.carousel-indicators {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 200;
+}
+.carousel-indicators button {
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  border: none;
+  background: rgba(255,255,255,0.6);
+  cursor: pointer;
+}
+.carousel-indicators button.active { background: white; }
+
+.carousel-thumbnails {
+  position: absolute;
+  bottom: -56px; /* placed below the carousel */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  /* keep thumbnails interactive and above overlay */
+  z-index: 200;
+}
+.carousel-thumbnails .thumb {
+  width: 52px;
+  height: 36px;
+  padding: 0;
+  border: 2px solid rgba(255,255,255,0.2);
+  background: transparent;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.carousel-thumbnails .thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.carousel-thumbnails .thumb.active { border-color: white; box-shadow: 0 6px 18px rgba(0,0,0,0.2); }
+
+/* space the content below the overlay; responsive */
+.content-with-overlay { padding-top: 380px; }
+
+/* Debug styles for carousel */
+.director-hero-overlay {
+  border: 2px solid red; /* Debug border */
+}
+
+.carousel-track {
+  border: 2px solid blue; /* Debug border */
+}
+
+.carousel-image {
+  border: 1px solid green; /* Debug border */
+}
+
+@media (max-width: 768px) {
+  .director-hero-overlay { 
+    top: 80px;
+    height: 220px; 
+    border: 2px solid orange; /* Debug border for mobile */
+  }
+  .content-with-overlay { padding-top: 300px; } /* 220 + 80 */
+}
+
+/* Styles for large screens */
+@media (min-width: 1200px) {
+  .director-hero-overlay {
+    height: 450px; /* Larger height for big screens */
+    border: 2px solid purple; /* Debug border for desktop */
+  }
+  .content-with-overlay { 
+    padding-top: 450px; 
+  }
+  .overlay-caption {
+    height: 450px; /* Match overlay height */
+  }
+}
+
+/* Caption text placed above the director overlay image */
+.overlay-caption {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* above overlay images but still under header */
+  z-index: 40; /* Lower than carousel controls (z-index: 200) */
+  display: flex;
+  align-items: center; /* center vertically */
+  justify-content: center; /* center horizontally */
+  pointer-events: none; /* allow clicks to pass except on the slogan */
+  height: 380px; /* match overlay height by default */
+}
+.overlay-caption .slogan {
+  color: white;
+  background: rgba(0,0,0,0.35);
+  padding: 10px 18px;
+  border-radius: 9999px;
+  font-weight: 800;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+  backdrop-filter: blur(4px);
+  text-align: center;
+  font-size: 1.125rem;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: captionFadeIn 900ms cubic-bezier(.22,.9,.3,1) 200ms both;
+  pointer-events: auto; /* slogan is clickable/selectable */
+}
+@media (max-width: 768px) {
+  .overlay-caption { top: 80px; height: 220px; }
+  .overlay-caption .slogan { font-size: 1rem; padding: 8px 14px; }
+}
+
+
+
+@keyframes captionFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}

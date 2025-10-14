@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react';
 
+// Stable default stats moved outside the component so it doesn't trigger
+// the react-hooks/exhaustive-deps warning when used inside useEffect.
+const DEFAULT_STATS = [
+  { value: '20+', label: "Années d'expérience" },
+  { value: '5', label: "Domaines d'expertise" },
+  { value: '25+', label: 'Jeunes formées (P.A.M.F)' },
+  { value: '3', label: 'Axes stratégiques' }
+];
+
 const EditAccueil = ({ page, onSave, onCancel }) => {
   // page.content is expected to be an object { title, lead, subtext, stats }
-  const defaultStats = [
-    { value: '20+', label: "Années d'expérience" },
-    { value: '5', label: "Domaines d'expertise" },
-    { value: '25+', label: 'Jeunes formées (P.A.M.F)' },
-    { value: '3', label: 'Axes stratégiques' }
-  ];
 
-  const initial = page && page.content ? page.content : { title: '', lead: '', subtext: '', stats: defaultStats, heroBg: '', ctaPrimary: { text: '', link: '' }, ctaSecondary: { text: '', link: '' } };
+  const initial = page && page.content ? page.content : { title: '', lead: '', subtext: '', stats: DEFAULT_STATS, heroBg: '', ctaPrimary: { text: '', link: '' }, ctaSecondary: { text: '', link: '' } };
   const [title, setTitle] = useState(initial.title || '');
   const [lead, setLead] = useState(initial.lead || '');
+  const [bannerSlogan, setBannerSlogan] = useState(initial.bannerSlogan || "");
+  const [directorWelcome, setDirectorWelcome] = useState(initial.directorWelcome || "");
   const [subtext, setSubtext] = useState(initial.subtext || '');
   const [stats, setStats] = useState(initial.stats || []);
   const [heroBg, setHeroBg] = useState(initial.heroBg || '');
@@ -19,11 +24,13 @@ const EditAccueil = ({ page, onSave, onCancel }) => {
   const [ctaSecondary, setCtaSecondary] = useState(initial.ctaSecondary || { text: '', link: '' });
 
   useEffect(() => {
-  const c = page && page.content ? page.content : { title: '', lead: '', subtext: '', stats: defaultStats, heroBg: '', ctaPrimary: { text: '', link: '' }, ctaSecondary: { text: '', link: '' } };
+  const c = page && page.content ? page.content : { title: '', lead: '', subtext: '', stats: DEFAULT_STATS, heroBg: '', ctaPrimary: { text: '', link: '' }, ctaSecondary: { text: '', link: '' } };
   setTitle(c.title || '');
   setLead(c.lead || '');
+  setBannerSlogan(c.bannerSlogan || '');
+  setDirectorWelcome(c.directorWelcome || '');
   setSubtext(c.subtext || '');
-  setStats((c.stats && c.stats.length > 0) ? c.stats : defaultStats);
+  setStats((c.stats && c.stats.length > 0) ? c.stats : DEFAULT_STATS);
   setHeroBg(c.heroBg || '');
   setCtaPrimary(c.ctaPrimary || { text: '', link: '' });
   setCtaSecondary(c.ctaSecondary || { text: '', link: '' });
@@ -37,7 +44,7 @@ const EditAccueil = ({ page, onSave, onCancel }) => {
   const handleRemoveStat = (index) => setStats(prev => prev.filter((_, i) => i !== index));
 
   const handleSave = () => {
-    const newContent = { title, lead, subtext, stats, heroBg, ctaPrimary, ctaSecondary };
+    const newContent = { title, lead, bannerSlogan, directorWelcome, subtext, stats, heroBg, ctaPrimary, ctaSecondary };
     onSave(page.id, newContent);
   };
 
@@ -53,6 +60,14 @@ const EditAccueil = ({ page, onSave, onCancel }) => {
           <div>
             <label className="block text-sm font-medium text-gray-700">Lead</label>
             <textarea value={lead} onChange={(e) => setLead(e.target.value)} className="mt-1 block w-full border rounded p-2 h-24" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Bannière (slogan)</label>
+            <input value={bannerSlogan} onChange={(e) => setBannerSlogan(e.target.value)} placeholder="Ex: L'Maaza — Innover au service des communautés" className="mt-1 block w-full border rounded p-2" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Mot de bienvenue du directeur</label>
+            <textarea value={directorWelcome} onChange={(e) => setDirectorWelcome(e.target.value)} className="mt-1 block w-full border rounded p-2 h-28" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">Sous-texte</label>

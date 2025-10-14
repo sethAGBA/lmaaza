@@ -1,3 +1,26 @@
-# https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Allow: /
+
+# Sitemap
+Sitemap: https://lmaaza.net/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Disallow admin and private areas
+Disallow: /admin
+Disallow: /profil
+Disallow: /api/
+
+# Allow important pages
+Allow: /
+Allow: /accueil
+Allow: /apropos
+Allow: /services
+Allow: /solutions
+Allow: /produits
+Allow: /formations
+Allow: /projets
+Allow: /blog
+Allow: /partenaires
+Allow: /contact

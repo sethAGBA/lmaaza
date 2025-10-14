@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import RenderContent from './RenderContent';
 
 const EditServices = ({ page, onSave, onCancel }) => {
   const initial = page && page.content ? page.content : '';

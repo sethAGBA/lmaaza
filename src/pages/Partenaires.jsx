@@ -16,16 +16,26 @@ const Partenaires = ({ menuItems }) => {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-          {['KA Technologies Group', 'Tilitu Lab', 'Nunya Lab', 'GRASE-Population'].map((partenaire, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-20 h-20 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white font-bold text-2xl">{partenaire.charAt(0)}</span>
+          {/* Auto-load partner images from public/images/partenaires */}
+          {[
+            'KATechnologiesGroup.png',
+            'tilutulab.jpeg',
+            // 'nunyalab.jpeg',
+            'grase-population.jpg'
+          ].map((fileName, index) => {
+            const name = fileName.replace(/[-_.][^/.]+$/,'').replace(/[-_]/g, ' ');
+            const imgSrc = `/images/partenaires/${fileName}`;
+            return (
+              <div key={index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow flex items-center justify-center">
+                <div className="text-center">
+                  <div className="w-28 h-28 rounded-full overflow-hidden mx-auto mb-4 flex items-center justify-center bg-gray-100">
+                    <img src={imgSrc} alt={name} className="object-cover w-full h-full" />
+                  </div>
+                  <h3 className="font-semibold text-gray-800">{name}</h3>
                 </div>
-                <h3 className="font-semibold text-gray-800">{partenaire}</h3>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="bg-white p-8 rounded-lg shadow-md text-center">

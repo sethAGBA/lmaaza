@@ -10,7 +10,7 @@ const Footer = () => {
           {/* Section L'Maaza */}
           <div>
             <h3 className="text-2xl font-bold mb-4">L'Maaza</h3>
-            <p className="text-gray-400">Première plateforme technologique innovante de la région de la Kara, au service de la transformation digitale togolaise.</p>
+            <p className="text-gray-400"> Plateforme technologique innovante de la région de la Kara, au service de la transformation digitale togolaise.</p>
             <div className="flex space-x-2 mt-3">
               <button className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-purple-600 transition-colors cursor-pointer"><Facebook className="w-5 h-5" /></button>
               <button className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-purple-600 transition-colors cursor-pointer"><Instagram className="w-5 h-5" /></button>
@@ -46,7 +46,7 @@ const Footer = () => {
             <h4 className="font-semibold mb-4">Contact Rapide</h4>
             <div className="text-gray-400 space-y-2">
               <p>Région de la Kara, Togo</p>
-              <p>contact@lmaaza.tg</p>
+              <p>startuplmaaza228@gmail.com</p>
               <p>+228 93 8929 19 / 90 09 26 72</p>
             </div>
           </div>

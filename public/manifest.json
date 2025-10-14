@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "L'Maaza",
+  "name": "L'Maaza - Innover au service des communautés",
+  "description": "L'Maaza développe des solutions technologiques innovantes pour l'Agriculture, la Santé, l'Éducation et l'Environnement au Togo.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +21,18 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#7c3aed",
+  "background_color": "#ffffff",
+  "lang": "fr",
+  "scope": "/",
+  "orientation": "portrait-primary",
+  "categories": ["technology", "education", "business"],
+  "screenshots": [
+    {
+      "src": "screenshot1.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ]
 }

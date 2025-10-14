@@ -69,3 +69,17 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 # lmaaza
+
+## Deployment to Vercel
+
+This is a Create React App project. To deploy on Vercel:
+
+1. Sign in to Vercel and import the repository.
+2. Set the Framework Preset to "Create React App" (or leave it autodetected).
+3. Build Command: `npm run build` (we also provide `vercel-build` which runs the same command).
+4. Output Directory: `build`.
+5. Keep the included `vercel.json` rewrite so client-side routing works (it rewrites all paths to `index.html`).
+
+If you need a specific Node version, Vercel will use the `engines.node` value from `package.json` (currently set to 18.x).
+
+Troubleshooting: if the build fails on Vercel, check the build logs in the Vercel dashboard. Common issues are missing environment variables or incompatible node modules; adjust package versions or provide necessary env vars in the project settings.
