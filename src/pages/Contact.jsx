@@ -1,6 +1,7 @@
 import React from 'react';
 import { MapPin, Phone, Mail, Globe } from 'lucide-react';
 import RenderContent from '../components/RenderContent';
+import WhatsAppIcon from '../components/WhatsAppIcon';
 
 const Contact = ({ menuItems }) => {
   const contactPage = menuItems.find(item => item.id === 'contact');
@@ -17,9 +18,16 @@ const Contact = ({ menuItems }) => {
 
         <div className="max-w-4xl mx-auto">
           {/* Informations de contact */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 text-white text-center">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 text-white text-center">
             <div className="flex flex-col items-center"><MapPin className="w-8 h-8 mb-2" /><span>Région de la Kara, Togo</span></div>
-            <div className="flex flex-col items-center"><Phone className="w-8 h-8 mb-2" /><span>+228 93 89 29 19 / 90 09 26 72</span></div>
+            <div className="flex flex-col items-center">
+              <Phone className="w-8 h-8 mb-2" />
+              <a href="https://wa.me/22893892919" target="_blank" rel="noopener noreferrer" className="flex items-center">
+                <WhatsAppIcon className="w-5 h-5 mr-1" />
+                <span>+228 93 89 29 19</span>
+              </a>
+              <span>+228 90 09 26 72</span>
+            </div>
             <div className="flex flex-col items-center"><Mail className="w-8 h-8 mb-2" /><span>startuplmaaza228@gmail.com</span></div>
             <div className="flex flex-col items-center"><Globe className="w-8 h-8 mb-2" /><span>www.lmaaza.net</span></div>
           </div>

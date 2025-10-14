@@ -79,7 +79,7 @@ const Accueil = ({ menuItems }) => {
               <div className="bg-white rounded-2xl shadow-lg p-8 border-l-4 border-purple-500">
                 <div className="text-center mb-6">
                   <div className="w-20 h-20 rounded-full mx-auto mb-4 overflow-hidden border-4 border-white shadow-md">
-                    <img src="/images/directeur.jpg" alt="BEBINESSO Toï Bebezseky" className="object-cover w-full h-full" />
+                    <img src="/images/directeur.jpeg" alt="BEBINESSO Toï Bebezseky" className="object-cover w-full h-full" />
                   </div>
                   <h3 className="text-xl font-semibold text-gray-800">BEBINESSO Toï Bebezseky</h3>
                   <p className="text-lg text-purple-600 font-medium">Directeur de L'Maaza</p>

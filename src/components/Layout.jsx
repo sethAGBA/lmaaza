@@ -23,13 +23,19 @@ const Layout = ({ children, menuItems }) => {
   // Carousel logic
   const bannerSlogan = "L'Maaza — Innover au service des communautés";
   const carouselImages = [
-    '/images/directeur.jpg',
-    '/images/ooz2_23.jpg',
-    '/images/ooz2_24.jpg',
-    '/images/ooz2_30.jpg',
-    '/images/ooz2_31.jpg',
-    '/images/ooz2_32.jpg',
-    '/images/ooz2_33.jpg'
+    '/images/PAGE_ACCEIL_ENTETE/4.jpg',
+    '/images/PAGE_ACCEIL_ENTETE/540A5452.JPG',
+    '/images/PAGE_ACCEIL_ENTETE/540A5619.JPG',
+    '/images/PAGE_ACCEIL_ENTETE/Capture d\'écran 2025-10-13 200534.png',
+    '/images/PAGE_ACCEIL_ENTETE/IMG_20251010_150247_154.jpg',
+    '/images/PAGE_ACCEIL_ENTETE/IMG_20251013_202651_394.jpg',
+    '/images/PAGE_ACCEIL_ENTETE/IMG-20210621-WA0016.jpg',
+    '/images/PAGE_ACCEIL_ENTETE/IMG-20210621-WA0019.jpg',
+    '/images/PAGE_ACCEIL_ENTETE/IMG-20220810-WA0017.jpg',
+    '/images/PAGE_ACCEIL_ENTETE/IMG-20220815-WA0036.jpg',
+    '/images/PAGE_ACCEIL_ENTETE/IMG-20221124-WA0011.jpg',
+    '/images/PAGE_ACCEIL_ENTETE/IMG-20221226-WA0018.jpg',
+    '/images/PAGE_ACCEIL_ENTETE/WhatsApp Image 2025-10-02 à 10.21.13_b0f60d2a.jpg'
   ];
 
   const [activeIndex, setActiveIndex] = useState(0);

@@ -86,19 +86,7 @@ export const projets = [
   {
     name: "P.A.M.F",
     fullName: "Projet Appui aux Meilleures Filles",
-    description: `FORMATION DES 25 MEILLEURES FILLES AU BEPC 2022 DES PREFECTURES DE KPELE ET DE DANYI EN SYSTEMES ELECTRONIQUE.
-Ce projet est organisé par l’ONG Grace Population et exécuté par notre Start-Up
-Contact : Mr Paul TEKO  90 15 37 90 
-I. Contexte et justification
-Au Togo et surtout dans les milieux ruraux, il existe très peu d’infrastructures TIC. Très peu de lycées et de collèges sont équipés de salles informatiques pour initier les jeunes à cet outil de conception, de recherche et de communication…Le besoins des jeunes élèves togolais en général et de ceux de la région des plateaux en particulier de posséder des connaissances solides en informatique et en programmation se fait toujours sentir. II. Objectif général
-Susciter chez les jeunes filles brevetées 2022 de la commune …, le gout à s’intéresser à la science, à la technologie et de démystifier les préjugés.
-
-II. Objectifs spécifiques 
-	Former 25 filles de la préfecture de Kpélé et de Danyi ayant réussi au BEPC, sur les notions de l’électronique embarquée et à la programmation d’objets électroniques pendant les vacances 2022 ;
-	Sensibiliser 25 filles de la préfecture de Kpélé et de Danyi ayant réussi au BEPC, sur les avantages et dangers de l’utilisation des médias sociaux en milieu scolaire pendant les vacances 2022 ;
-	Former 25 filles de la préfecture de Kpélé et de Danyi ayant réussi au BEPC, au Leadership pour les adolescentes pendant les vacances 2022.
-
-`,
+    description: `<p>En partenariat avec l'ONG Grace Population, ce projet a formé les 25 meilleures lauréates au BEPC 2022 des préfectures de Kpélé et Danyi. L'objectif était de les initier aux systèmes électroniques et de les encourager à poursuivre des carrières dans les sciences et technologies.</p><br/><p><b>Objectifs Clés :</b></p><ul><li><b>Formation Technique :</b> Initiation à l'électronique embarquée et à la programmation d'objets.</li><li><b>Sensibilisation Numérique :</b> Prise de conscience des avantages et des risques des réseaux sociaux.</li><li><b>Développement Personnel :</b> Formation au leadership pour adolescentes.</li></ul><br/><p>Ce projet vise à réduire la fracture numérique en milieu rural et à démystifier la technologie auprès des jeunes filles, les encourageant à devenir les innovatrices de demain.</p>`,
     year: "2022",
     location: "Kpélé et Danyi",
     impact: "25 jeunes filles formées"
@@ -110,6 +98,30 @@ II. Objectifs spécifiques
     year: "2021",
     location: "Collège Adel de Kara",
     impact: "Enseignants et élèves formés"
+  },
+  {
+    name: "Formation ALL SSHOL",
+    fullName: "Découverte et pratique de la FABRIQUE D’UN MODULE/CARTE D’UN APPAREIL ELCTRONIQUE FONCTIONNELLE par les élèves de ALL SSHOL de Kara",
+    description: `<p>Une formation théorique et pratique dans le domaine de la technologie a été organisée par les autorités de l’école ALL SSHOL de Kara en collaboration avec la Start-Up L’Maaza, à l’endroit de leurs élèves des classes de quatrième. Les dix meilleurs élèves de cette classe (05 garçons et 05 filles) ont bénéficié de cette formation pendant cinq jours à raison de 04 heures de cours par jours.</p><br/><p><b>Thématiques abordées :</b></p><ul><li>Etude et rôle des composants électroniques usuels</li><li>Sais de circuit électrique dans un logiciel CAO</li><li>Tracé d’un PCB</li><li>Procédure de production d’un PCB à base d’une solution chimique</li><li>Perçage d’un PCB</li><li>Soudure des composants</li><li>Tests et dépannage</li></ul><br/><p>Au bout des cinq jours de formation les bénéficiaires ont réussi à produire deux cartes électroniques fonctionnelles : un amplificateur audio de 20W et un interrupteur crépusculaire.</p>`,
+    year: "2021",
+    location: "Kara",
+    impact: "10 élèves formés"
+  },
+  {
+    name: "Serveur Automatique",
+    fullName: "Présentation de notre Serveur Automatique de boissons locale",
+    description: `<p>En visite à Kara, la délégation de l’Union Européenne, le centre Tilitu Lab de Kara à fait l’honneur à notre Start-Up de présenter et de démontrer notre machine développé par notre Start-Up pour permettre aux femmes revendeuses boisons locales (tchoukoudou, tchakpalo, lossomissin…) de servir cette boissons dans des conditions sanitaires optimales et de disposer d’une comptabilité efficace.</p>`,
+    year: "2021",
+    location: "Tilitu Lab de Kara",
+    impact: "Présentation à l'Union Européenne"
+  },
+  {
+    name: "Renforcement de capacité des enseignants",
+    fullName: "ATELIER DE RENFORCEMENT DE CAPACITE DES ENSEIGNANTS CHARGES DU COURS DE TECHNOLOGIE DANS L’ENSEIGNEMENT GENERAL CYCLE_1 DE KARA",
+    description: `<p>En collaboration avec l’Inspection de l’enseignement Général de Kara (IESG), La Start-Up L’Maaza a animé une formation pratique à l’endroit d’une vingtaine d’enseignants (Enseignants de physique-chimie/ mathématiques/ svt) du premier cycle de l’enseignement général. Cette formation s’est tenue au Lycée Tomdè de Kara.</p><p>Pendant cinq jours, les participants ont été formés sur la thématique suivante : Fabrication d’objets technologiques.</p>`,
+    year: "2021",
+    location: "Lycée Tomdè de Kara",
+    impact: "une vingtaine d’enseignants formés"
   }
 ];
 

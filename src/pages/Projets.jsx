@@ -1,6 +1,6 @@
 import React from 'react';
 import RenderContent from '../components/RenderContent';
-import { Award, Cpu, Code, Wrench } from 'lucide-react';
+import { Award, Cpu, Code, Wrench, Calendar, MapPin, Users } from 'lucide-react';
 import { projets } from '../data';
 
 const Projets = ({ menuItems }) => {
@@ -36,10 +36,31 @@ const Projets = ({ menuItems }) => {
               'Formation_Arduino': [
                 '/images/projets/Formation_Arduino/formationArduino1.png',
                 '/images/projets/Formation_Arduino/formationArduino2.png'
+              ],
+              'Formation ALL SSHOL': [
+                '/images/project_add/1.jpg',
+                '/images/project_add/2.jpg',
+                '/images/project_add/3.jpg',
+                '/images/project_add/4.jpg',
+                '/images/project_add/5.jpg'
+              ],
+              'Serveur Automatique': [
+                '/images/project_add2/1.jpg',
+                '/images/project_add2/2.jpg',
+                '/images/project_add2/3.jpg'
+              ],
+              'Renforcement de capacité des enseignants': [
+                '/images/project_add1/1.jpg',
+                '/images/project_add1/2.jpg',
+                '/images/project_add1/3.jpg',
+                '/images/project_add1/4.jpg',
+                '/images/project_add1/5.jpg',
+                '/images/project_add1/6.jpg',
+                '/images/project_add1/7.jpg',
+                '/images/project_add1/8.jpg'
               ]
             };
-            const folderKey = projet.name === 'P.A.M.F' ? 'P.A.M.F' : (projet.name === 'P.E.T.E' ? 'P.E.T.E' : 'Formation_Arduino');
-            const imgs = imagesMap[folderKey] || [];
+            const imgs = imagesMap[projet.name] || [];
 
             return (
             <div key={index} className="bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
@@ -53,7 +74,7 @@ const Projets = ({ menuItems }) => {
                 </div>
               </div>
               
-              <p className="text-gray-600 mb-6">{projet.description}</p>
+              <RenderContent content={projet.description} className="text-gray-600 mb-6" />
               
               {/* Project images gallery */}
               {imgs.length > 0 && (
@@ -66,20 +87,28 @@ const Projets = ({ menuItems }) => {
                 </div>
               )}
 
-              <div className="grid grid-cols-2 gap-4 mb-4">
-                <div className="bg-white p-3 rounded-lg">
-                  <div className="text-sm text-gray-500">Année</div>
-                  <div className="font-semibold text-gray-800">{projet.year}</div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="bg-white p-3 rounded-lg flex items-center">
+                  <Calendar className="w-6 h-6 text-purple-600 mr-2" />
+                  <div>
+                    <div className="text-sm text-gray-500">Année</div>
+                    <div className="font-semibold text-gray-800">{projet.year}</div>
+                  </div>
                 </div>
-                <div className="bg-white p-3 rounded-lg">
-                  <div className="text-sm text-gray-500">Lieu</div>
-                  <div className="font-semibold text-gray-800">{projet.location}</div>
+                <div className="bg-white p-3 rounded-lg flex items-center">
+                  <MapPin className="w-6 h-6 text-purple-600 mr-2" />
+                  <div>
+                    <div className="text-sm text-gray-500">Lieu</div>
+                    <div className="font-semibold text-gray-800">{projet.location}</div>
+                  </div>
                 </div>
-              </div>
-              
-              <div className="bg-white p-3 rounded-lg">
-                <div className="text-sm text-gray-500">Impact</div>
-                <div className="font-semibold text-purple-600">{projet.impact}</div>
+                <div className="bg-white p-3 rounded-lg flex items-center">
+                  <Users className="w-6 h-6 text-purple-600 mr-2" />
+                  <div>
+                    <div className="text-sm text-gray-500">Impact</div>
+                    <div className="font-semibold text-purple-600">{projet.impact}</div>
+                  </div>
+                </div>
               </div>
             </div>
           )})}

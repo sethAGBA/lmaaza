@@ -15,7 +15,7 @@ const Header = ({ isScrolled, menuItems }) => {
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className={`text-2xl font-bold ${isScrolled ? 'text-purple-600' : 'text-white'}`}>
-            L'Maaza
+            <img src="/images/logo.jpeg" alt="L'Maaza" className="h-8 w-auto" />
           </Link>
           
           {/* Desktop Menu */}
