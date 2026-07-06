@@ -16,6 +16,7 @@ import Partenaires from './pages/Partenaires';
 import Contact from './pages/Contact';
 import Profil from './pages/Profil';
 import Admin from './pages/Admin';
+import Maintenance from './pages/Maintenance';
 import { menuItems as initialMenuItems, services as initialServices } from './data';
 
 function App() {
@@ -33,6 +34,16 @@ function App() {
     setIsLoggedIn(false);
     setRole('user');
   };
+
+  const MAINTENANCE_MODE = true;
+
+  if (MAINTENANCE_MODE) {
+    return (
+      <HelmetProvider>
+        <Maintenance />
+      </HelmetProvider>
+    );
+  }
 
   return (
     <HelmetProvider>

@@ -1,0 +1,10 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" rx="40" fill="#0f172a"/>
+  <circle cx="400" cy="250" r="120" fill="#1e293b" stroke="#38bdf8" stroke-width="16"/>
+  <path d="M380 180H420V300H380V180Z" fill="#cbd5e1"/>
+  <path d="M340 240H460V280H340V240Z" fill="#cbd5e1"/>
+  <path d="M365 145L400 115L435 145V175H365V145Z" fill="#38bdf8"/>
+  <path d="M220 420H580C598.091 420 612 406.091 612 388V270C612 251.909 598.091 238 580 238H220C201.909 238 188 251.909 188 270V388C188 406.091 201.909 420 220 420Z" fill="#1e293b" stroke="#38bdf8" stroke-width="14"/>
+  <text x="400" y="520" fill="#f8fafc" font-family="Inter, sans-serif" font-size="42" font-weight="700" text-anchor="middle">Maintenance temporaire</text>
+  <text x="400" y="560" fill="#cbd5e1" font-family="Inter, sans-serif" font-size="22" text-anchor="middle">Revenir bientôt</text>
+</svg>
