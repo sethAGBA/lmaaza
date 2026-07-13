@@ -2,6 +2,7 @@
   "routes": [
     { "src": "/api/auth/login", "dest": "/api/auth/login.js" },
     { "src": "/api/auth/me", "dest": "/api/auth/me.js" },
+    { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
