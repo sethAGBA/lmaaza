@@ -60,7 +60,13 @@ export async function initializeStorage(options = {}) {
       return { initialized: false, count: existing.length };
     }
 
-    // Run migration and persist articles
+    // En production avec ApiAdapter, la migration est gérée côté serveur.
+    // Le client ne peut pas écrire sans token admin.
+    if (process.env.NODE_ENV === 'production') {
+      return { initialized: false, count: existing.length };
+    }
+
+    // Run migration and persist articles (dev only)
     const migrated = migrateArticles();
     await adapter.saveMultipleArticles(migrated);
 
