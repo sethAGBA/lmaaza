@@ -3,9 +3,9 @@
     { "src": "/api/auth/login", "dest": "/api/auth/login.js" },
     { "src": "/api/auth/me", "dest": "/api/auth/me.js" },
     { "src": "/api/ping", "dest": "/api/ping.js" },
-    { "src": "/api/articles/([^/]+)", "dest": "/api/articles/[id].js" },
+    { "src": "/api/articles/([^/]+)", "dest": "/api/articles/[id].js?id=$1" },
     { "src": "/api/articles", "dest": "/api/articles/index.js" },
-    { "src": "/api/media/([^/]+)", "dest": "/api/media/[id].js" },
+    { "src": "/api/media/([^/]+)", "dest": "/api/media/[id].js?id=$1" },
     { "src": "/api/media", "dest": "/api/media/index.js" },
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/index.html" }
