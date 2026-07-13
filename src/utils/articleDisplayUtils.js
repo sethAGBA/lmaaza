@@ -35,7 +35,11 @@ export function getArticleMediaUrl(article) {
 }
 
 export function isImageUrl(url) {
-  return typeof url === 'string' && /\.(png|jpe?g|svg|webp|gif)(\?.*)?$/i.test(url);
+  if (typeof url !== 'string') return false;
+  // Data URLs (base64)
+  if (url.startsWith('data:image/')) return true;
+  // Regular file URLs
+  return /\.(png|jpe?g|svg|webp|gif)(\?.*)?$/i.test(url);
 }
 
 export function isVideoUrl(url) {
