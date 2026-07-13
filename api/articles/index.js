@@ -3,28 +3,36 @@
  * POST /api/articles   → crée/met à jour un article (admin requis)
  */
 
-let Redis;
-try {
-  Redis = require('@upstash/redis').Redis;
-} catch (e) {
-  console.error('[api/articles] Failed to load @upstash/redis:', e.message);
-}
-
-const { verifyToken, extractBearerToken, setCorsHeaders } = require('../lib/auth');
-
 const ARTICLES_KEY = 'lmaaza:articles';
 
-function getRedis() {
-  const url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
-  if (!Redis) throw new Error('@upstash/redis module not available');
-  if (!url || !token) throw new Error('Missing Redis env vars: KV_REST_API_URL / KV_REST_API_TOKEN');
-  return new Redis({ url, token });
+function setCorsHeaders(res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 }
 
-async function getAllArticles() {
-  const data = await getRedis().get(ARTICLES_KEY);
-  return Array.isArray(data) ? data : [];
+function getRedis() {
+  const { Redis } = require('@upstash/redis');
+  return new Redis({
+    url: process.env.KV_REST_API_URL,
+    token: process.env.KV_REST_API_TOKEN,
+  });
+}
+
+function extractBearer(req) {
+  const h = req.headers.authorization || '';
+  const m = h.match(/^Bearer\s+(.+)$/i);
+  return m ? m[1] : null;
+}
+
+function verifyJwt(token) {
+  try {
+    const jwt = require('jsonwebtoken');
+    const secret = process.env.JWT_SECRET || 'lmaaza-dev-secret-change-in-production';
+    return jwt.verify(token, secret);
+  } catch {
+    return null;
+  }
 }
 
 module.exports = async (req, res) => {
@@ -33,24 +41,20 @@ module.exports = async (req, res) => {
 
   if (req.method === 'GET') {
     try {
-      const articles = await getAllArticles();
+      const redis = getRedis();
+      const data = await redis.get(ARTICLES_KEY);
+      const articles = Array.isArray(data) ? data : [];
       return res.status(200).json({ articles });
     } catch (err) {
-      console.error('[api/articles GET]', err);
-      return res.status(500).json({
-        error: 'Erreur serveur',
-        detail: err.message,
-        hasRedisModule: !!Redis,
-        hasUrl: !!process.env.KV_REST_API_URL,
-        hasToken: !!process.env.KV_REST_API_TOKEN,
-      });
+      console.error('[api/articles GET]', err.message);
+      return res.status(500).json({ error: 'Erreur serveur', detail: err.message });
     }
   }
 
   if (req.method === 'POST') {
-    const token = extractBearerToken(req);
-    const user = token ? verifyToken(token) : null;
-    if (!user || user.role !== 'admin') {
+    const token = extractBearer(req);
+    const payload = token ? verifyJwt(token) : null;
+    if (!payload || payload.role !== 'admin') {
       return res.status(403).json({ error: 'Accès administrateur requis' });
     }
 
@@ -60,7 +64,8 @@ module.exports = async (req, res) => {
         return res.status(400).json({ error: 'Article invalide' });
       }
       const redis = getRedis();
-      const articles = await getAllArticles();
+      const data = await redis.get(ARTICLES_KEY);
+      const articles = Array.isArray(data) ? data : [];
       const index = articles.findIndex((a) => a.id === article.id);
       if (index >= 0) {
         articles[index] = article;
@@ -70,7 +75,7 @@ module.exports = async (req, res) => {
       await redis.set(ARTICLES_KEY, articles);
       return res.status(200).json({ article });
     } catch (err) {
-      console.error('[api/articles POST]', err);
+      console.error('[api/articles POST]', err.message);
       return res.status(500).json({ error: 'Erreur serveur', detail: err.message });
     }
   }
