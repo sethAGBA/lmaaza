@@ -14,17 +14,21 @@
 
 import { migrateArticles } from '../migration/migrateBlogData.js';
 import { LocalStorageAdapter } from '../adapters/localStorageAdapter.js';
+import { ApiAdapter } from '../adapters/apiAdapter.js';
 
 // Shared adapter instance (singleton for this module)
 let _adapter = null;
 
 /**
- * Get or create the LocalStorageAdapter instance.
- * @returns {LocalStorageAdapter}
+ * Get or create the adapter instance.
+ * En production → ApiAdapter (Vercel KV), en dev → LocalStorageAdapter.
  */
 function getAdapter() {
   if (!_adapter) {
-    _adapter = new LocalStorageAdapter();
+    _adapter =
+      process.env.NODE_ENV === 'production'
+        ? new ApiAdapter()
+        : new LocalStorageAdapter();
   }
   return _adapter;
 }

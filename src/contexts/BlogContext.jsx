@@ -5,6 +5,7 @@
 
 import React, { createContext, useContext, useMemo } from 'react';
 import { LocalStorageAdapter } from '../adapters/localStorageAdapter.js';
+import { ApiAdapter } from '../adapters/apiAdapter.js';
 import { ArticleService } from '../services/articleService.js';
 import { MediaService } from '../services/mediaService.js';
 import { SearchService } from '../services/searchService.js';
@@ -16,7 +17,12 @@ let sharedAdapter = null;
 
 function getSharedAdapter() {
   if (!sharedAdapter) {
-    sharedAdapter = new LocalStorageAdapter();
+    // En production (Vercel), utiliser l'ApiAdapter qui persiste dans Vercel KV.
+    // En développement local, utiliser LocalStorageAdapter pour un dev rapide.
+    sharedAdapter =
+      process.env.NODE_ENV === 'production'
+        ? new ApiAdapter()
+        : new LocalStorageAdapter();
   }
   return sharedAdapter;
 }
