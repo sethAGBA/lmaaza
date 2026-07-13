@@ -1,149 +1,233 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { X } from 'lucide-react';
 import RenderContent from '../components/RenderContent';
-import { ArrowRight, Calendar, Clock, User, Video, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { blogPosts } from '../data';
 import SEO from '../components/SEO';
+import ErrorBoundary from '../components/ErrorBoundary';
+import SearchBar from '../components/blog/SearchBar';
+import CategoryFilter from '../components/blog/CategoryFilter';
+import TagCloud from '../components/blog/TagCloud';
+import ArticleCard from '../components/blog/ArticleCard';
+import Pagination from '../components/blog/Pagination';
+import { useBlog } from '../contexts/BlogContext';
+import { paginate } from '../utils/paginationUtils';
+
+const ITEMS_PER_PAGE = 12;
 
 const Blog = ({ menuItems }) => {
-  const blogPage = menuItems.find(item => item.id === 'blog');
+  const { articleService, searchService } = useBlog();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const blogPage = menuItems.find((item) => item.id === 'blog');
+
+  const [articles, setArticles] = useState([]);
+  const [tagCounts, setTagCounts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedTag, setSelectedTag] = useState(() => searchParams.get('tag'));
+  const [currentPage, setCurrentPage] = useState(1);
   const [modalVideo, setModalVideo] = useState(null);
 
-  // Local overrides to reuse images without editing src/data.js
-  const imageOverrides = {
-    1: '/images/projets/Projet(P.A.M.F)/image1.jpg',
-    2: '/images/projets/Formation_Arduino/formationArduino1.png',
-    // Use video for the 'Serveur Automatique' post (id:3)
-    3: '/images/PROJET_SERVEUR_AUTOMATIQUE.mp4',
-    // For "L'Importance de l'Éducation Technologique pour les Filles" use eleve3
-    4: '/images/projets/Projet(P.E.T.E)/eleve3.jpg'
-  };
+  useEffect(() => {
+    const tagFromUrl = searchParams.get('tag');
+    if (tagFromUrl) setSelectedTag(tagFromUrl);
+  }, [searchParams]);
+
+  useEffect(() => {
+    articleService.getPublishedArticles().then((published) => {
+      const counts = {};
+      published.forEach((a) => {
+        (a.tags || []).forEach((tag) => {
+          counts[tag] = (counts[tag] || 0) + 1;
+        });
+      });
+      setTagCounts(
+        Object.entries(counts)
+          .map(([tag, count]) => ({ tag, count }))
+          .sort((a, b) => b.count - a.count)
+      );
+    });
+  }, [articleService]);
+
+  const loadArticles = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const results = await articleService.filterPublishedArticles({
+        category: selectedCategory,
+        tag: selectedTag,
+        query: searchQuery,
+        searchService,
+      });
+      setArticles(results);
+    } catch (err) {
+      setError('Impossible de charger les articles. Veuillez réessayer.');
+    } finally {
+      setLoading(false);
+    }
+  }, [articleService, searchService, selectedCategory, selectedTag, searchQuery]);
+
+  useEffect(() => {
+    loadArticles();
+  }, [loadArticles]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, selectedCategory, selectedTag]);
+
+  const handleTagSelect = useCallback(
+    (tag) => {
+      setSelectedTag(tag);
+      if (tag) {
+        setSearchParams({ tag });
+      } else {
+        setSearchParams({});
+      }
+    },
+    [setSearchParams]
+  );
+
+  const { items: pageArticles, totalPages, totalItems } = useMemo(
+    () => paginate(articles, currentPage, ITEMS_PER_PAGE),
+    [articles, currentPage]
+  );
+
+  const highlight = useCallback(
+    (text, query) => searchService.highlightMatches(text, query),
+    [searchService]
+  );
+
+  const hasActiveFilters = searchQuery || selectedCategory || selectedTag;
 
   return (
     <>
-      <SEO 
+      <SEO
         title="Blog - Actualités et Innovations Technologiques | L'Maaza"
         description="Découvrez les dernières actualités technologiques, innovations et projets de L'Maaza. Articles sur l'agriculture, la santé, l'éducation et l'environnement au Togo."
         keywords="blog technologique, innovation, agriculture, santé, éducation, environnement, Togo, Arduino, formation, L'Maaza, actualités"
         canonical="https://lmaaza.net/blog"
       />
+
       <div className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">Notre Blog</h2>
+          <header className="text-center mb-12">
+            <h1 className="text-4xl font-bold text-gray-800 mb-4">Notre Blog</h1>
             <div className="text-xl text-gray-600">
-              {blogPage ? <RenderContent content={blogPage.content} /> : "Chargement du contenu..."}
+              {blogPage ? (
+                <RenderContent content={blogPage.content} />
+              ) : (
+                'Chargement du contenu...'
+              )}
             </div>
-          </div>
+          </header>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post) => {
-              const displayImage = imageOverrides[post.id] || post.image;
-              const isImagePath = typeof displayImage === 'string' && /\.(png|jpe?g|svg|webp|gif)$/.test(displayImage);
-              const isVideoPath = typeof displayImage === 'string' && /\.(mp4|webm|ogg)$/.test(displayImage);
-              const mediaSrc = displayImage;
-              return (
-                <article key={post.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow flex flex-col">
-                  <div className="h-48 bg-gray-200 flex items-center justify-center overflow-hidden relative">
-                    {isVideoPath ? (
-                      <div className="relative w-full h-full">
-                        <img src="/images/video-poster.jpg" alt="Video thumbnail" className="object-cover w-full h-full" />
-                        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                          <button 
-                            onClick={() => setModalVideo(mediaSrc)}
-                            className="bg-purple-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-purple-700 transition-colors flex items-center gap-2"
-                          >
-                            <Video className="w-5 h-5" />
-                            Voir la vidéo
-                          </button>
-                        </div>
-                      </div>
-                    ) : isImagePath ? (
-                      <img src={mediaSrc} alt={post.title} className="object-cover w-full h-full" />
-                    ) : (
-                      <div className="text-6xl text-gray-400">{displayImage}</div>
-                    )}
-                  </div>
+          <section className="mb-8 space-y-4" aria-label="Recherche et filtres">
+            <div className="flex justify-center">
+              <SearchBar onSearch={setSearchQuery} initialQuery={searchQuery} />
+            </div>
+            <CategoryFilter
+              selectedCategory={selectedCategory}
+              onCategorySelect={setSelectedCategory}
+            />
+            <TagCloud
+              tags={tagCounts}
+              selectedTag={selectedTag}
+              onTagSelect={handleTagSelect}
+            />
+            {hasActiveFilters && (
+              <p className="text-sm text-gray-600 text-center">
+                {totalItems} article{totalItems !== 1 ? 's' : ''} trouvé
+                {totalItems !== 1 ? 's' : ''}
+              </p>
+            )}
+          </section>
 
-                  <div className="p-6 flex-grow flex flex-col">
-                    <div className="flex items-center mb-3">
-                      <span className="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm font-semibold">
-                        {post.category}
-                      </span>
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-3 line-clamp-2">
-                      {post.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4 line-clamp-3 flex-grow">
-                      {post.excerpt}
-                    </p>
-                    <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                      <div className="flex items-center">
-                        <User className="w-4 h-4 mr-1" />
-                        <span>{post.author}</span>
-                      </div>
-                      <div className="flex items-center">
-                        <Clock className="w-4 h-4 mr-1" />
-                        <span>{post.readTime}</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center text-gray-500">
-                        <Calendar className="w-4 h-4 mr-1" />
-                        <span className="text-sm">{post.date}</span>
-                      </div>
-                      <Link to={`/blog/${post.id}`} className="text-purple-600 hover:text-purple-800 font-semibold flex items-center">
-                        Lire la suite
-                        <ArrowRight className="w-4 h-4 ml-1" />
-                      </Link>
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
+          <ErrorBoundary title="Erreur d'affichage du blog">
+            {loading ? (
+              <p className="text-center text-gray-500 py-12">Chargement des articles…</p>
+            ) : error ? (
+              <p className="text-center text-red-600 py-12" role="alert">
+                {error}
+              </p>
+            ) : pageArticles.length === 0 ? (
+              <p className="text-center text-gray-600 py-12">
+                Aucun article ne correspond à vos critères de recherche.
+              </p>
+            ) : (
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {pageArticles.map((article) => (
+                    <ArticleCard
+                      key={article.id}
+                      article={article}
+                      searchQuery={searchQuery}
+                      highlightFn={highlight}
+                      onVideoClick={setModalVideo}
+                    />
+                  ))}
+                </div>
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={setCurrentPage}
+                />
+              </>
+            )}
+          </ErrorBoundary>
 
-          <div className="mt-12 text-center">
+          <aside className="mt-12 text-center">
             <div className="bg-white p-8 rounded-lg shadow-lg max-w-2xl mx-auto">
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">Restez Informé</h3>
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">Restez Informé</h2>
               <p className="text-gray-600 mb-6">
-                Abonnez-vous à notre newsletter pour recevoir les derniers articles et actualités technologiques.
+                Abonnez-vous à notre newsletter pour recevoir les derniers articles et
+                actualités technologiques.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                <input 
-                  type="email" 
+                <input
+                  type="email"
                   placeholder="Votre adresse email"
                   className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  aria-label="Adresse email pour la newsletter"
                 />
-                <button className="bg-purple-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
-                  S'abonner
+                <button
+                  type="button"
+                  className="bg-purple-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-purple-700 transition-colors"
+                >
+                  S&apos;abonner
                 </button>
               </div>
             </div>
-          </div>
+          </aside>
         </div>
       </div>
 
       {modalVideo && (
-        <div 
+        <div
           className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4"
           onClick={() => setModalVideo(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Lecteur vidéo"
         >
-          <div 
+          <div
             className="relative bg-white dark:bg-gray-900 w-full max-w-4xl rounded-lg shadow-2xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            <button 
+            <button
+              type="button"
               onClick={() => setModalVideo(null)}
               className="absolute top-3 right-3 bg-gray-800 text-white rounded-full p-2 z-10 hover:bg-gray-700 transition-colors"
+              aria-label="Fermer la vidéo"
             >
               <X className="w-6 h-6" />
             </button>
-            <video 
-              src={modalVideo} 
-              className="w-full h-auto max-h-[80vh]" 
-              controls 
-              autoPlay 
+            <video
+              src={modalVideo}
+              className="w-full h-auto max-h-[80vh]"
+              controls
+              autoPlay
               playsInline
               preload="metadata"
             >

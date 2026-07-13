@@ -1,18 +1,25 @@
-import { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { generateOpenGraphTags } from '../services/seoService';
 
-const setMeta = (key, value, isProperty = false) => {
-  if (!value && value !== '') return;
-  const selector = isProperty ? `meta[property="${key}"]` : `meta[name="${key}"]`;
-  let el = document.head.querySelector(selector);
-  if (!el) {
-    el = document.createElement('meta');
-    if (isProperty) el.setAttribute('property', key);
-    else el.setAttribute('name', key);
-    document.head.appendChild(el);
-  }
-  el.setAttribute('content', value);
-};
-
+/**
+ * SEO Component - Enhanced with react-helmet-async
+ * 
+ * Injects SEO metadata into HTML head for better search engine optimization.
+ * Supports canonical URLs, meta descriptions, keywords, Open Graph tags, and Twitter cards.
+ * 
+ * Requirements: 6.7
+ * 
+ * @param {object} props - Component props
+ * @param {string} [props.title] - Page title (if null, uses default)
+ * @param {string} [props.description] - Meta description (if null, uses default)
+ * @param {string|string[]} [props.keywords] - Meta keywords (string or array)
+ * @param {string} [props.canonical] - Canonical URL
+ * @param {string} [props.ogImage] - Open Graph image URL
+ * @param {string} [props.type] - Open Graph type (default: "website")
+ * @param {object} [props.structuredData] - JSON-LD structured data
+ * @param {object} [props.article] - Article object for blog posts (auto-generates OG tags)
+ * @returns {JSX.Element} Helmet component with SEO metadata
+ */
 const SEO = ({ 
   title = "L'Maaza - Innover au service des communautés",
   description = "L'Maaza développe des solutions technologiques innovantes pour l'Agriculture, la Santé, l'Éducation et l'Environnement au Togo. Formation des jeunes, projets technologiques et innovation durable.",
@@ -20,76 +27,82 @@ const SEO = ({
   canonical = "https://lmaaza.net",
   ogImage = "https://lmaaza.net/og-image.jpg",
   type = "website",
-  structuredData = null
+  structuredData = null,
+  article = null
 }) => {
-  useEffect(() => {
-    const fullTitle = title.includes("L'Maaza") ? title : `${title} | L'Maaza`;
-    const fullDescription = description || "L'Maaza développe des solutions technologiques innovantes pour l'Agriculture, la Santé, l'Éducation et l'Environnement au Togo.";
+  // Build full title with site name
+  const fullTitle = title.includes("L'Maaza") ? title : `${title} | L'Maaza`;
+  
+  // Ensure description has a value
+  const fullDescription = description || "L'Maaza développe des solutions technologiques innovantes pour l'Agriculture, la Santé, l'Éducation et l'Environnement au Togo.";
+  
+  // Convert keywords to comma-separated string if array
+  const keywordsString = Array.isArray(keywords) ? keywords.join(', ') : keywords;
 
-    // Title
-    document.title = fullTitle;
+  // If article is provided, generate Open Graph tags from article data
+  let ogTags = null;
+  if (article) {
+    ogTags = generateOpenGraphTags(article);
+  }
 
-    // Basic metas
-    setMeta('description', fullDescription);
-    setMeta('keywords', keywords);
-    setMeta('author', "L'Maaza");
-    setMeta('robots', 'index, follow');
-    setMeta('language', 'fr');
-    setMeta('revisit-after', '7 days');
+  // Use article-generated OG tags or fallback to provided props
+  const ogTitle = ogTags?.ogTitle || fullTitle;
+  const ogDescription = ogTags?.ogDescription || fullDescription;
+  const ogImageUrl = ogTags?.ogImage || ogImage;
+  const ogUrl = ogTags?.ogUrl || canonical;
+  const ogType = ogTags?.ogType || type;
 
-    // Canonical link
-    let canonicalEl = document.head.querySelector('link[rel="canonical"]');
-    if (!canonicalEl) {
-      canonicalEl = document.createElement('link');
-      canonicalEl.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonicalEl);
-    }
-    canonicalEl.setAttribute('href', canonical);
+  return (
+    <Helmet>
+      {/* Title */}
+      <title>{fullTitle}</title>
 
-    // Open Graph
-    setMeta('og:type', type, true);
-    setMeta('og:url', canonical, true);
-    setMeta('og:title', fullTitle, true);
-    setMeta('og:description', fullDescription, true);
-    setMeta('og:image', ogImage, true);
-    setMeta('og:site_name', "L'Maaza", true);
-    setMeta('og:locale', 'fr_FR', true);
+      {/* Basic Meta Tags */}
+      <meta name="description" content={fullDescription} />
+      {keywordsString && <meta name="keywords" content={keywordsString} />}
+      <meta name="author" content="L'Maaza" />
+      <meta name="robots" content="index, follow" />
+      <meta name="language" content="fr" />
+      <meta name="revisit-after" content="7 days" />
 
-    // Twitter
-    setMeta('twitter:card', 'summary_large_image');
-    setMeta('twitter:url', canonical);
-    setMeta('twitter:title', fullTitle);
-    setMeta('twitter:description', fullDescription);
-    setMeta('twitter:image', ogImage);
-    setMeta('twitter:site', '@lmaaza');
-    setMeta('twitter:creator', '@lmaaza');
+      {/* Canonical URL */}
+      <link rel="canonical" href={canonical} />
 
-    // Additional
-    setMeta('theme-color', '#7c3aed');
-    setMeta('msapplication-TileColor', '#7c3aed');
-    setMeta('viewport', 'width=device-width, initial-scale=1.0');
+      {/* Open Graph Tags */}
+      <meta property="og:type" content={ogType} />
+      <meta property="og:url" content={ogUrl} />
+      <meta property="og:title" content={ogTitle} />
+      <meta property="og:description" content={ogDescription} />
+      {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+      <meta property="og:site_name" content="L'Maaza" />
+      <meta property="og:locale" content="fr_FR" />
 
-    // Geo
-    setMeta('geo.region', 'TG');
-    setMeta('geo.country', 'Togo');
-    setMeta('geo.placename', 'Togo');
+      {/* Twitter Card Tags */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:url" content={ogUrl} />
+      <meta name="twitter:title" content={ogTitle} />
+      <meta name="twitter:description" content={ogDescription} />
+      {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
+      <meta name="twitter:site" content="@lmaaza" />
+      <meta name="twitter:creator" content="@lmaaza" />
 
-    // Structured data
-    if (structuredData) {
-      let sd = document.getElementById('seo-ldjson');
-      if (!sd) {
-        sd = document.createElement('script');
-        sd.setAttribute('type', 'application/ld+json');
-        sd.setAttribute('id', 'seo-ldjson');
-        document.head.appendChild(sd);
-      }
-      sd.innerHTML = JSON.stringify(structuredData);
-    }
+      {/* Theme and Appearance */}
+      <meta name="theme-color" content="#7c3aed" />
+      <meta name="msapplication-TileColor" content="#7c3aed" />
 
-    // no cleanup on unmount to keep tags stable across route changes; override on next mount
-  }, [title, description, keywords, canonical, ogImage, type, structuredData]);
+      {/* Geo Tags */}
+      <meta name="geo.region" content="TG" />
+      <meta name="geo.country" content="Togo" />
+      <meta name="geo.placename" content="Togo" />
 
-  return null;
+      {/* Structured Data (JSON-LD) */}
+      {structuredData && (
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
+      )}
+    </Helmet>
+  );
 };
 
 export default SEO;

@@ -1,0 +1,118 @@
+[
+  {
+    "id": "046e4f34-50b7-470a-89c0-3b5b6eb27c34",
+    "title": "L'Innovation Technologique au Service de l'Agriculture Togolaise",
+    "excerpt": "Découvrez comment les technologies modernes transforment l'agriculture traditionnelle au Togo et créent de nouvelles opportunités pour les agriculteurs locaux.",
+    "content": "L'agriculture au Togo est à un tournant. Grâce à l'introduction de capteurs simples, d'applications mobiles et de solutions de monitoring, les petits exploitants peuvent aujourd'hui mieux gérer l'eau, optimiser les semis et améliorer les rendements.\n\n  Dans cet article, nous présentons des cas concrets issus de nos projets pilotes : installation de capteurs d'humidité, formation des agriculteurs à l'utilisation d'applications de prévision météorologique, et déploiement de systèmes d'irrigation intelligents adaptés aux petites exploitations.\n\n  Ces interventions montrent que la technologie, quand elle est pensée pour le contexte local, devient un levier puissant pour la sécurité alimentaire et la résilience des communautés rurales.",
+    "category": "Agriculture",
+    "tags": [],
+    "featuredImage": null,
+    "author": "BEBINESSO Toi Bebezseky",
+    "readTime": 5,
+    "slug": "l-innovation-technologique-au-service-de-l-agriculture-togolaise",
+    "status": "published",
+    "createdAt": "2024-12-15T00:00:00.000Z",
+    "updatedAt": "2024-12-15T00:00:00.000Z",
+    "publishedAt": "2024-12-15T00:00:00.000Z",
+    "seoMetadata": {
+      "title": null,
+      "description": "Découvrez comment les technologies modernes transforment l'agriculture traditionnelle au Togo et créent de nouvelles opportunités pour les agriculteurs locaux.",
+      "keywords": [],
+      "canonicalUrl": "https://lmaaza.com/blog/l-innovation-technologique-au-service-de-l-agriculture-togolaise",
+      "openGraph": {
+        "ogTitle": "L'Innovation Technologique au Service de l'Agriculture Togolaise",
+        "ogDescription": "Découvrez comment les technologies modernes transforment l'agriculture traditionnelle au Togo et créent de nouvelles opportunités pour les agriculteurs locaux.",
+        "ogImage": null,
+        "ogType": "article",
+        "ogUrl": "https://lmaaza.com/blog/l-innovation-technologique-au-service-de-l-agriculture-togolaise"
+      }
+    }
+  },
+  {
+    "id": "d2c6bf46-b736-44d6-a8bd-396af467c566",
+    "title": "Formation Arduino : Démystifier l'Électronique pour les Jeunes",
+    "excerpt": "Retour sur notre formation Arduino organisée avec Tilitu Lab et son impact sur l'éveil technologique des participants.",
+    "content": "La formation Arduino que nous avons tenue avec Tilitu Lab visait à initier les jeunes aux bases de l'électronique et de la programmation. En moins d'une semaine, les participants ont réalisé des prototypes simples : capteurs lumineux, systèmes d'alerte et petits robots.\n\n  L'approche pratique et ludique a permis de lever les peurs autour de l'électronique. De nombreux jeunes ont exprimé leur désir de poursuivre l'apprentissage et de participer à des projets de fabrication numérique.\n\n  Nous pensons que l'apprentissage par la pratique est la clé pour susciter des vocations et fournir des compétences utiles pour l'emploi local.",
+    "category": "Formation",
+    "tags": [],
+    "featuredImage": null,
+    "author": "TETE MAWUSSI KOSSI FELIX",
+    "readTime": 4,
+    "slug": "formation-arduino-demystifier-l-electronique-pour-les-jeunes",
+    "status": "published",
+    "createdAt": "2024-12-10T00:00:00.000Z",
+    "updatedAt": "2024-12-10T00:00:00.000Z",
+    "publishedAt": "2024-12-10T00:00:00.000Z",
+    "seoMetadata": {
+      "title": null,
+      "description": "Retour sur notre formation Arduino organisée avec Tilitu Lab et son impact sur l'éveil technologique des participants.",
+      "keywords": [],
+      "canonicalUrl": "https://lmaaza.com/blog/formation-arduino-demystifier-l-electronique-pour-les-jeunes",
+      "openGraph": {
+        "ogTitle": "Formation Arduino : Démystifier l'Électronique pour les Jeunes",
+        "ogDescription": "Retour sur notre formation Arduino organisée avec Tilitu Lab et son impact sur l'éveil technologique des participants.",
+        "ogImage": null,
+        "ogType": "article",
+        "ogUrl": "https://lmaaza.com/blog/formation-arduino-demystifier-l-electronique-pour-les-jeunes"
+      }
+    }
+  },
+  {
+    "id": "3c2a344a-7689-43c1-9a32-255b19b730e9",
+    "title": "Le Serveur Automatique : Innovation et Tradition Réunies",
+    "excerpt": "Comment notre serveur automatique de boissons locales préserve les traditions tout en apportant l'innovation technologique.",
+    "content": "Le serveur automatique de boissons locales est un projet qui combine savoir-faire traditionnel et technologie locale. Il garantit l'hygiène, la disponibilité et une expérience utilisateur moderne tout en valorisant des recettes locales.\n\n  Nous avons travaillé avec des artisans et des entrepreneurs pour concevoir une machine simple à utiliser, facile à maintenir et adaptable à différentes boissons locales. Le résultat : une solution qui aide à professionnaliser la vente ambulante et à créer des revenus supplémentaires.\n\n  Le projet illustre notre philosophie : innover en respectant et en mettant en valeur les traditions locales.",
+    "category": "Innovation",
+    "tags": [],
+    "featuredImage": null,
+    "author": "L'Maaza Team",
+    "readTime": 6,
+    "slug": "le-serveur-automatique-innovation-et-tradition-reunies",
+    "status": "published",
+    "createdAt": "2024-12-05T00:00:00.000Z",
+    "updatedAt": "2024-12-05T00:00:00.000Z",
+    "publishedAt": "2024-12-05T00:00:00.000Z",
+    "seoMetadata": {
+      "title": null,
+      "description": "Comment notre serveur automatique de boissons locales préserve les traditions tout en apportant l'innovation technologique.",
+      "keywords": [],
+      "canonicalUrl": "https://lmaaza.com/blog/le-serveur-automatique-innovation-et-tradition-reunies",
+      "openGraph": {
+        "ogTitle": "Le Serveur Automatique : Innovation et Tradition Réunies",
+        "ogDescription": "Comment notre serveur automatique de boissons locales préserve les traditions tout en apportant l'innovation technologique.",
+        "ogImage": null,
+        "ogType": "article",
+        "ogUrl": "https://lmaaza.com/blog/le-serveur-automatique-innovation-et-tradition-reunies"
+      }
+    }
+  },
+  {
+    "id": "10802941-7938-4fc3-a226-8c54b3d94154",
+    "title": "L'Importance de l'Éducation Technologique pour les Filles",
+    "excerpt": "Pourquoi il est crucial d'encourager les jeunes filles à s'orienter vers les filières technologiques et comment y parvenir.",
+    "content": "Encourager les filles vers les études technologiques est un enjeu majeur pour l'égalité des chances et le développement. Les barrières culturelles et le manque d'exemples restent des freins importants.\n\n  Dans cet article, nous partageons des retours d'expérience de mentors, des témoignages de jeunes filles formées et des recommandations pour les écoles et les décideurs : renforcer les programmes pratiques, former des enseignantes et créer des espaces sûrs pour l'expérimentation.\n\n  Investir dans l'éducation technologique des filles, c'est investir dans un avenir plus inclusif et innovant.",
+    "category": "Éducation",
+    "tags": [],
+    "featuredImage": null,
+    "author": "DADJA Massamasso Clarisse",
+    "readTime": 7,
+    "slug": "l-importance-de-l-education-technologique-pour-les-filles",
+    "status": "published",
+    "createdAt": "2024-12-01T00:00:00.000Z",
+    "updatedAt": "2024-12-01T00:00:00.000Z",
+    "publishedAt": "2024-12-01T00:00:00.000Z",
+    "seoMetadata": {
+      "title": null,
+      "description": "Pourquoi il est crucial d'encourager les jeunes filles à s'orienter vers les filières technologiques et comment y parvenir.",
+      "keywords": [],
+      "canonicalUrl": "https://lmaaza.com/blog/l-importance-de-l-education-technologique-pour-les-filles",
+      "openGraph": {
+        "ogTitle": "L'Importance de l'Éducation Technologique pour les Filles",
+        "ogDescription": "Pourquoi il est crucial d'encourager les jeunes filles à s'orienter vers les filières technologiques et comment y parvenir.",
+        "ogImage": null,
+        "ogType": "article",
+        "ogUrl": "https://lmaaza.com/blog/l-importance-de-l-education-technologique-pour-les-filles"
+      }
+    }
+  }
+]
