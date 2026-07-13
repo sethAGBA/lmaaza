@@ -196,9 +196,12 @@ export class ArticleService {
       this._checkAdminRole();
     }
 
-    const existing = await this.storage.getArticle(id);
+    let existing = await this.storage.getArticle(id);
+
+    // Si l'article n'existe pas encore dans le storage (ex: créé localement
+    // mais pas encore persisté côté serveur), on fait un upsert avec les updates.
     if (!existing) {
-      throw new Error('Article non trouvé.');
+      existing = updates.id ? updates : { id, ...updates };
     }
 
     // Validate updates
@@ -212,8 +215,8 @@ export class ArticleService {
     const updated = {
       ...existing,
       ...updates,
-      id: existing.id, // Preserve ID
-      createdAt: existing.createdAt, // Preserve creation time
+      id: existing.id || id, // Preserve ID
+      createdAt: existing.createdAt || new Date().toISOString(), // Preserve creation time
       updatedAt: new Date().toISOString(), // Update modification time
     };
 

@@ -33,6 +33,9 @@ async function apiFetch(path, options = {}) {
 
   const response = await fetch(path, { ...options, headers });
 
+  // 404 retourne null — pas une erreur
+  if (response.status === 404) return null;
+
   if (!response.ok) {
     const body = await response.json().catch(() => ({}));
     throw new StorageError(
@@ -56,15 +59,8 @@ export class ApiAdapter extends StorageAdapter {
   }
 
   async getArticle(id) {
-    try {
-      const data = await apiFetch(`/api/articles/${encodeURIComponent(id)}`);
-      return data.article || null;
-    } catch (err) {
-      if (err instanceof StorageError && err.message.includes('404')) return null;
-      // Retourne null si non trouvé (404 traité comme absence)
-      if (err?.message?.startsWith('Erreur HTTP 404')) return null;
-      throw err;
-    }
+    const data = await apiFetch(`/api/articles/${encodeURIComponent(id)}`);
+    return data ? (data.article || null) : null;
   }
 
   async getAllArticles() {
@@ -88,12 +84,8 @@ export class ApiAdapter extends StorageAdapter {
   }
 
   async getMedia(id) {
-    try {
-      const data = await apiFetch(`/api/media/${encodeURIComponent(id)}`);
-      return data.asset || null;
-    } catch {
-      return null;
-    }
+    const data = await apiFetch(`/api/media/${encodeURIComponent(id)}`);
+    return data ? (data.asset || null) : null;
   }
 
   async getAllMedia() {
