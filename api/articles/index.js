@@ -23,7 +23,12 @@ module.exports = async (req, res) => {
       return res.status(200).json({ articles });
     } catch (err) {
       console.error('[api/articles GET]', err);
-      return res.status(500).json({ error: 'Erreur serveur' });
+      return res.status(500).json({
+        error: 'Erreur serveur',
+        detail: err.message,
+        hasUrl: !!process.env.KV_REST_API_URL,
+        hasToken: !!process.env.KV_REST_API_TOKEN,
+      });
     }
   }
 
