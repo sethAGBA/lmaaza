@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Calendar, Clock, User, Video } from 'lucide-react';
+import { ArrowRight, Calendar, Clock, User, Video, Pencil } from 'lucide-react';
 import {
   formatPublishedDate,
   formatReadTime,
@@ -9,6 +9,7 @@ import {
   isVideoUrl,
   truncateExcerpt,
 } from '../../utils/articleDisplayUtils';
+import { useAuth } from '../../contexts/AuthContext';
 
 /**
  * ArticleCard — aperçu d'un article publié.
@@ -20,6 +21,8 @@ const ArticleCard = memo(function ArticleCard({
   onVideoClick,
   highlightFn,
 }) {
+  const { user } = useAuth();
+  const isAdmin = user?.role === 'admin';
   const mediaUrl = getArticleMediaUrl(article);
   const isImage = mediaUrl && isImageUrl(mediaUrl);
   const isVideo = mediaUrl && isVideoUrl(mediaUrl);
@@ -38,7 +41,20 @@ const ArticleCard = memo(function ArticleCard({
       : excerptText;
 
   return (
-    <article className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow flex flex-col">
+    <article className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow flex flex-col relative">
+      {/* Bouton d'édition admin */}
+      {isAdmin && (
+        <Link
+          to={`/admin/blog/edit/${article.id}`}
+          className="absolute top-2 right-2 z-10 flex items-center gap-1 bg-purple-600 hover:bg-purple-700 text-white text-xs font-medium px-2 py-1 rounded-md shadow transition-colors"
+          title="Modifier cet article"
+          aria-label={`Modifier l'article "${article.title}"`}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <Pencil className="w-3 h-3" />
+          Modifier
+        </Link>
+      )}
       <div className="h-48 bg-gray-200 flex items-center justify-center overflow-hidden relative">
         {isVideo ? (
           <div className="relative w-full h-full">
