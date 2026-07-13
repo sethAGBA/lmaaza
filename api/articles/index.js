@@ -3,10 +3,24 @@
  * POST /api/articles   → crée/met à jour un article (admin requis)
  */
 
-const { getRedis } = require('../lib/redis');
+let Redis;
+try {
+  Redis = require('@upstash/redis').Redis;
+} catch (e) {
+  console.error('[api/articles] Failed to load @upstash/redis:', e.message);
+}
+
 const { verifyToken, extractBearerToken, setCorsHeaders } = require('../lib/auth');
 
 const ARTICLES_KEY = 'lmaaza:articles';
+
+function getRedis() {
+  const url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!Redis) throw new Error('@upstash/redis module not available');
+  if (!url || !token) throw new Error('Missing Redis env vars: KV_REST_API_URL / KV_REST_API_TOKEN');
+  return new Redis({ url, token });
+}
 
 async function getAllArticles() {
   const data = await getRedis().get(ARTICLES_KEY);
@@ -26,6 +40,7 @@ module.exports = async (req, res) => {
       return res.status(500).json({
         error: 'Erreur serveur',
         detail: err.message,
+        hasRedisModule: !!Redis,
         hasUrl: !!process.env.KV_REST_API_URL,
         hasToken: !!process.env.KV_REST_API_TOKEN,
       });
@@ -44,6 +59,7 @@ module.exports = async (req, res) => {
       if (!article || !article.id) {
         return res.status(400).json({ error: 'Article invalide' });
       }
+      const redis = getRedis();
       const articles = await getAllArticles();
       const index = articles.findIndex((a) => a.id === article.id);
       if (index >= 0) {
@@ -51,11 +67,11 @@ module.exports = async (req, res) => {
       } else {
         articles.push(article);
       }
-      await getRedis().set(ARTICLES_KEY, articles);
+      await redis.set(ARTICLES_KEY, articles);
       return res.status(200).json({ article });
     } catch (err) {
       console.error('[api/articles POST]', err);
-      return res.status(500).json({ error: 'Erreur serveur' });
+      return res.status(500).json({ error: 'Erreur serveur', detail: err.message });
     }
   }
 
